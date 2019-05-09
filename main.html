@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>360会员商城</title>
+    <link rel="stylesheet" href="src/css/base_px.css">
+    <link rel="stylesheet" href="src/css/swiper.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <style type="text/css">
+        .mod-banner{
+            height:448px;
+        }
+        .swiper-container{
+            height: 448px;
+        }
+        .swiper-slide{
+            height: 448px;
+            font-size: 50px;
+            color: #fff;
+        }
+        .swiper-pagination-bullet{
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            color: rgba(0, 0, 0, 0.3);
+        }
+        .swiper-pagination-bullet-active{
+            background: #fff;
+        }
+        .swiper-button-prev{
+            left:100px;
+        }
+        .swiper-button-next{
+            right:100px;
+        }
+        .swiper-button-prev:hover{
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .swiper-button-next:hover{
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+    </style>
+
+</head>
+<body>
+    <!-- 头部 -->
+    <div class="mod-header">
+        <!-- 顶部 -->
+        <div class="topbox">
+            <ul class="con">
+                <li class="topbox-item fl"><a href="javascript:;">帮助中心</a></li> 
+                 <li class="topbox-item fl"><a class="js-connect" href="javascript:;">收藏本站</a></li> 
+                <li class="topbox-item fl">
+                    <a href="javascript:;">登录</a>
+                    <a href="javascript:;">注册</a>
+                    <i></i>
+                    <a class="js-connect" href="javascript:;">手机360商城</a>
+                </li>
+            </ul>
+            
+        </div>
+        <!-- logo加搜索区 -->
+        <div class="top-container">
+            <div class="top-logo con">
+                <h1 class="fl"><a href="javascript:;"><img src="src\img\logo.png" alt=""></a></h1>
+            </div>
+            <div class="top-search fl">
+                <input type="text" class="text" placeholder="360儿童手表">
+                <input type="button" class="search">
+
+            </div>
+            <div class="top-showCart fl">
+                <a href="javascript:;">
+                    <i class="icon"></i>
+                    我的购物车
+                    <span>(0)</span>
+                </a>                
+            </div>
+            <!-- 二维码 -->
+            <div class="top-QRcode">
+                <div class="QRcode">
+                    <img src="src/img/QR-code.png" alt="">       
+                </div>
+            </div>
+
+            <p class="searchKey">
+                <a href="javascript:;">安全路由</a>
+                <a href="javascript:;">儿童手表SE3 Plus</a>
+                <a href="javascript:;">智能摄像机云台版</a>
+                <a href="javascript:;">行车记录仪G600</a>
+                <a href="javascript:;">电话手表X1 Pro</a>  
+            </p>
+
+        </div> 
+          <!-- 导航 -->
+        <div class="top-nav">
+            <ul class="navbar fl">
+                <li class="top-item topfrist"><a href="">全部智能产品</a></li>
+                <li><a href="">安全路由</a></li>
+                <li><a href="">儿童手表</a></li>
+                <li><a href="">家庭安防</a></li>
+                <li><a href="">行车记录仪</a></li>
+                <li><a href="">生活电器</a></li>
+                <li><a href="">配件</a></li>
+                <li><a href="">社区</a></li>
+            </ul>
+            <p class="fl"><a href="javascript:;">返回旧版&gt;&gt;</a>  </p>
+        </div>
+        
+    </div>
+
+    <!-- 轮播图 -->
+    <div class="mod-banner">
+        <div class="swiper-container" id="swiper-container" swiper-animate-effect="fadeIn">
+           <div class="swiper-wrapper" >
+               <div class="swiper-slide" ><img  src="src/img/t01cb6dc970f38a3fd5.webp"/></div>
+               <div class="swiper-slide" ><img  src="src/img/t01d8279d8234d1c494.webp"/></div>
+               <div class="swiper-slide" ><img  src="src/img/t01dffc9b38342fe9de.webp"/></div>
+               <div class="swiper-slide" ><img  src="src/img/t018ab717946eeb39b3.webp"/></div>
+               <div class="swiper-slide" ><img  src="src/img/t01733c401ab904d1ef.webp"/></div>
+           </div>
+           按钮
+           <div class="swiper-button-prev"></div>
+           <div class="swiper-button-next"></div>
+           分页
+           <div class="swiper-pagination"></div>
+       </div>
+        
+    </div>
+
+    <!-- 主体     -->
+    <div id="mod-main" class="con">
+        <!-- 热门活动 -->
+        <div class="mod-activity">
+            <div class="mod-hd">
+                <h2 class="tit">热门活动</h2>
+            </div>
+            <ul class="hot-list">
+                <li class="first">
+                    <a href="javascript:;">
+                        <div class="prd-detail">
+                            <span class="name">360AI音响MAX - M1</span>
+                            <span class="price">
+                                ￥199
+                            </span>
+                        </div>
+                        <div class="imgbox">
+                            <img src="src/img/360AI MAX - M1.png" height="140" width="145"/>
+                        </div>
+                    </a>
+                </li>
+                <li class="two">
+                    <a href="javascript:;">
+                        <div class="prd-detail">
+                            <span class="name">360AI音响MAX - M1</span>
+                            <span class="price">
+                                ￥199
+                            </span>
+                        </div>
+                        <div class="imgbox">
+                            <img src="src/img/360AI MAX - M1.png" height="140" width="145"/>
+                        </div>
+                    </a>
+                </li>
+                <li class="three">
+                    <a href="javascript:;">
+                        <div class="prd-detail">
+                            <span class="name">360AI音响MAX - M1</span>
+                            <span class="price">
+                                ￥199
+                            </span>
+                        </div>
+                        <div class="imgbox">
+                            <img src="src/img/360AI MAX - M1.png" height="140" width="145"/>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 限时购 -->
+        <div class="mod-timeToBuy">
+            <!-- 标题 -->
+            <div class="js_countdonw">
+                <h2 class="tit">
+                    <img src="src/img/tit-seckill.png" height="30" width="83" alt="" />
+                    |
+                    <span>10:00场</span>
+                    <i class="icon-cd"></i>
+                    <span class="cd-dec">距结束</span>
+                    <div class="countdown">
+                        <span class="cd-item">01</span>
+                        <span class="colon">:</span>
+                        <span class="cd-item">17</span>
+                        <span class="colon">:</span>
+                        <span class="cd-item">50</span>
+                    </div>
+                </h2>
+                <a href="javascript:;" class="indexmore">更多</a>                
+            </div>
+            <!-- 商品 -->
+            <div class="mod-bd">
+                <ul class="kill-list">
+                    <li class="kill-item">
+                        <div class="kill-item-box">
+                            <div class="prod-img">
+                                    <img src="src/img/t01d5fc3501661b65e1.png">
+                            </div>
+                            <div class="text-box">
+                                <p class="name">360智能摄像机店铺版第二代</p>
+                                <p class="price">
+                                    <b class="cur-price">￥349</b>
+                                    <del>￥399</del>
+                                </p>
+                                <p class="info">
+                                    <span class="num"></span>
+                                    <a href="javascript:;" class="killbtn disabled">已抢光</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="kill-item">
+                        <div class="kill-item-box">
+                            <div class="prod-img">
+                                    <img src="src/img/t01d5fc3501661b65e1.png">
+                            </div>
+                            <div class="text-box">
+                                <p class="name">360智能摄像机店铺版第二代</p>
+                                <p class="price">
+                                    <b class="cur-price">￥349</b>
+                                    <del>￥399</del>
+                                </p>
+                                <p class="info">
+                                    <span class="num"></span>
+                                    <a href="javascript:;" class="killbtn disabled">已抢光</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="kill-item">
+                        <div class="kill-item-box">
+                            <div class="prod-img">
+                                    <img src="src/img/t01d5fc3501661b65e1.png">
+                            </div>
+                            <div class="text-box">
+                                <p class="name">360智能摄像机店铺版第二代</p>
+                                <p class="price">
+                                    <b class="cur-price">￥349</b>
+                                    <del>￥399</del>
+                                </p>
+                                <p class="info">
+                                    <span class="num"></span>
+                                    <a href="javascript:;" class="killbtn disabled">已抢光</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="kill-item">
+                        <div class="kill-item-box">
+                            <div class="prod-img">
+                                    <img src="src/img/t01d5fc3501661b65e1.png">
+                            </div>
+                            <div class="text-box">
+                                <p class="name">360智能摄像机店铺版第二代</p>
+                                <p class="price">
+                                    <b class="cur-price">￥349</b>
+                                    <del>￥399</del>
+                                </p>
+                                <p class="info">
+                                    <span class="num"></span>
+                                    <a href="javascript:;" class="killbtn disabled">已抢光</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="kill-ad">
+                    <a href="javascript:;">
+                        <img src="src/img/t01b9fd518a9742e075.png" alt="" />
+                        <img src="src/img/t01c85d4660b2013119.png" alt="" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 热门商品 -->
+        <div class="mod-hodGoods">
+            <div class="mod-hd">
+                <h2 class="tit">热门商品</h2>
+            </div>
+            <!-- 家庭防火墙 -->
+            <div class="mod-bd">
+                <div class="prod-tit">
+                    <a href="javascript:;">
+                        <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
+                    </a>                    
+                </div>
+                <ul class="prod-list">
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 儿童守护 -->
+            <div class="mod-bd">
+    <div class="prod-tit">
+        <a href="javascript:;">
+            <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
+        </a>                    
+    </div>
+    <ul class="prod-list">
+        <li>
+            <a href="">
+                <div class="imgbox">
+                    <img class="js-lazyload" src="src/img/louyouqi1.png">
+                </div>
+                <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                <p class="proprice">¥199</p>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="imgbox">
+                    <img class="js-lazyload" src="src/img/louyouqi1.png">
+                </div>
+                <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                <p class="proprice">¥199</p>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="imgbox">
+                    <img class="js-lazyload" src="src/img/louyouqi1.png">
+                </div>
+                <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                <p class="proprice">¥199</p>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="imgbox">
+                    <img class="js-lazyload" src="src/img/louyouqi1.png">
+                </div>
+                <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                <p class="proprice">¥199</p>
+            </a>
+        </li>
+    </ul>
+            </div>
+            <!-- 家庭安防 -->
+            <div class="mod-bd">
+                <div class="prod-tit">
+                    <a href="javascript:;">
+                        <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
+                    </a>                    
+                </div>
+                <ul class="prod-list">
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 行车安全 -->
+            <div class="mod-bd">
+                <div class="prod-tit">
+                    <a href="javascript:;">
+                        <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
+                    </a>                    
+                </div>
+                <ul class="prod-list">
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 扫地机器人 -->
+            <div class="mod-bd">
+                <div class="prod-tit">
+                    <a href="javascript:;">
+                        <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
+                    </a>                    
+                </div>
+                <ul class="prod-list">
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <div class="imgbox">
+                                <img class="js-lazyload" src="src/img/louyouqi1.png">
+                            </div>
+                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                            <p class="proprice">¥199</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div id="mod-foot">
+        <!-- 退货 -->
+        <div class="foot-bannerw">
+            <div class="foot-banner con">
+                    <div class="banner-item">
+                        <a href="javascript:;">
+                            <i>7</i>
+                            7天无理由退货
+                        </a>
+                    </div>
+                    <div class="banner-item">
+                        <a href="javascript:;">
+                            <i>15</i>
+                            15天免费换货
+                        </a>
+                    </div>
+                    <div class="banner-item">
+                        <a href="javascript:;">
+                            <i>包</i>
+                            满99元包邮
+                        </a>
+                    </div>
+            </div>
+        </div>
+        <!-- 帮助中心 -->
+        <div class="foot-containerw con">
+            <dl>
+                <dt>帮助中心</dt>
+                <dd><a href="javascript:;">用户注册</a></dd>
+                <dd><a href="javascript:;">用户登录与密码找回</a></dd>
+                <dd><a href="javascript:;">购买指南</a></dd>
+                <dd><a href="javascript:;">支付方式</a></dd>
+                <dd><a href="javascript:;">配送与说明</a></dd> 
+            </dl>
+            <dl>
+                <dt>帮助中心</dt>
+                <dd><a href="javascript:;">用户注册</a></dd>
+                <dd><a href="javascript:;">用户登录与密码找回</a></dd>
+                <dd><a href="javascript:;">购买指南</a></dd>
+                <dd><a href="javascript:;">支付方式</a></dd>
+            </dl>
+            <dl>
+                <dt>帮助中心</dt>
+                <dd>客服电话</dd>
+                <dd><span class="call-number">400-1555-360</span></dd>
+                <dd>周一至周日 9:00-21:00</dd>
+                <dd>(仅收市话费)</dd>
+            </dl>
+            <dl>
+               <dd class="servicebox">
+                   <p>
+                       <a class="weixin">
+                           <img src="src/img/t0113493aa732f72837.png">
+                           <span class="wxtips">
+                                <img src="src/img/t016e66025b5cc27ae7.png" height="80" width="80">
+                           </span>
+                       </a>
+                   </p>
+               </dd> 
+            </dl>
+        </div>
+        <!-- 备案 -->
+        <div class="footer-copyright">
+            <p>360会员商城©2019 360公司版权所有 京ICP备08010314号-43 京公网安备11000002000006号</p> 
+        </div>
+    </div>
+
+
+
+</body>
+
+<script src="src/lib/jquery-1.10.1.min.js"></script>
+<script src="src/lib/swiper.min.js"></script>
+<script src="src/js/index.js"></script>
+</html>

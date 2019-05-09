@@ -1,0 +1,9 @@
+body{
+    background-color: #f5f5f5;
+    overflow: auto;
+    min-width: 1240px;
+}
+.topbox{
+    width: 1920px;
+    height: 45px;
+}
