@@ -469,6 +469,10 @@ body {
   color: #302e33;
 }
 
+.foot-banner .banner-item a:hover {
+  color: #23ac38;
+}
+
 .foot-banner .banner-item a i {
   display: inline-block;
   width: 36px;
@@ -552,6 +556,41 @@ body {
   text-align: center;
   line-height: 101px;
   color: #848484;
+}
+
+/* 回到顶部 */
+.slidebar {
+  position: fixed;
+  right: 2px;
+  bottom: 20px;
+  z-index: 999;
+}
+.slidebar li {
+  margin-top: -1px;
+  display: block;
+  width: 38px;
+  height: 38px;
+  line-height: 999;
+  text-align: center;
+  border: 1px solid #ddd;
+  background: #fff url(../img/sidebar-icons.png) no-repeat 50%;
+  overflow: hidden;
+  transition: background-color .2s;
+}
+.slidebar li:hover {
+  background: #848484;
+  line-height: 19px;
+  font-size: 13px;
+}
+.slidebar li a {
+  color: #fff;
+}
+.slidebar .rfeedback {
+  background-position: 0 0;
+}
+.slidebar .toback {
+  background-position: 0 -160px;
+  display: none;
 }
 
 /*# sourceMappingURL=list.css.map */

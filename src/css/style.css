@@ -69,6 +69,224 @@ body {
   color: #58bc58;
 }
 
+.fixed-code {
+  position: absolute;
+  right: 0;
+  width: 169px;
+  transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+  z-index: 50;
+}
+.fixed-code .big-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.fixed-code .small-box {
+  position: absolute;
+  top: 0;
+  right: 23px;
+  width: 101px;
+  cursor: pointer;
+  z-index: 0;
+  display: none;
+}
+
+.close-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  background: url(../img/closeCode.png) no-repeat;
+  background-size: contain;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .2s linear;
+}
+.close-icon:hover {
+  background: #ddd;
+}
+
+.quc-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #000;
+  opacity: .3;
+}
+
+.quc-panel {
+  z-index: 4000;
+  width: 360px;
+  height: 439px;
+  position: fixed;
+  background: #fff;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  margin-left: -180px;
+  margin-top: -166px;
+}
+
+.quc-hd {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.quc-title {
+  font-weight: 500;
+}
+
+.quc-tab-list {
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+.quc-tab-item {
+  float: left;
+}
+
+.quc-tab-item a {
+  color: #333;
+}
+
+.quc-tab-list .quc-tab-item-active .quc-tab-item-inner {
+  color: #36b447;
+  border-bottom: 1px solid #36b447;
+}
+
+.quc-title .quc-tab-sep {
+  margin: 2px 16px 0;
+  height: 16px;
+  border-right: 1px solid #e3e3e3;
+  float: left;
+}
+
+.quc-tab-item-inner {
+  float: left;
+  padding-bottom: 4px;
+}
+
+.quc-tab-item-inner:hover {
+  color: #36b447;
+}
+
+.quc-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #d2d0d0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.quc-main {
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 300px;
+}
+
+.quc-main input {
+  width: 278px;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  display: inline-block;
+  color: #333;
+  height: 20px;
+  line-height: 20px;
+  padding: 10px;
+}
+
+.quc-form-item {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.quc-input-append {
+  right: 31px;
+  background: #fafafa;
+  border-left: 1px solid #ddd;
+  width: 120px;
+  position: absolute;
+  top: 158px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #ccc;
+}
+
+.quc-get-token {
+  color: #36b447;
+  cursor: pointer;
+}
+
+.quc-button-list {
+  margin-top: 10px;
+}
+
+.quc-button {
+  font-size: 18px;
+  background: #36b447;
+  border-color: #36b447;
+  color: #fff;
+}
+
+.quc-button-list input {
+  width: 300px;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  display: inline-block;
+  color: #fff;
+  height: 40px;
+  padding: 10px;
+}
+
+.quc-form-tips {
+  margin-top: 10px;
+  color: #6f6f6f;
+  font-size: 14px;
+}
+
+.quc-form-tips .quc-right {
+  color: #6f6f6f;
+  float: right;
+}
+
+.quc-form-tips .quc-right:hover {
+  color: #36b447;
+}
+
+.quc-form-tips .quc-left {
+  color: #6f6f6f;
+  float: left;
+}
+
+.quc-form-tips .quc-left:hover {
+  color: #36b447;
+}
+
+.quc-input-prefix {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 40px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  color: #ccc;
+}
+
+.quc-input-has-prefix input {
+  padding-left: 40px;
+  width: 238px;
+}
+
 /* logo 加搜索区 */
 .top-container {
   width: 100%;
@@ -113,12 +331,6 @@ body {
   margin-top: 38px;
   font-size: 12px;
   margin-left: 34px;
-}
-.top-showCart a:hover{
-  color:#23ac38;
-}
-.top-showCart a:hover span{
-  color:#23ac38;
 }
 
 .top-showCart .icon {
@@ -512,6 +724,9 @@ body {
 .foot-banner .banner-item a {
   color: #302e33;
 }
+.foot-banner .banner-item a:hover {
+  color: #23ac38;
+}
 .foot-banner .banner-item a i {
   display: inline-block;
   width: 36px;
@@ -586,6 +801,41 @@ body {
   text-align: center;
   line-height: 101px;
   color: #848484;
+}
+
+/* 回到顶部 */
+.slidebar {
+  position: fixed;
+  right: 2px;
+  bottom: 20px;
+  z-index: 999;
+}
+.slidebar li {
+  margin-top: -1px;
+  display: block;
+  width: 38px;
+  height: 38px;
+  line-height: 999;
+  text-align: center;
+  border: 1px solid #ddd;
+  background: #fff url(../img/sidebar-icons.png) no-repeat 50%;
+  overflow: hidden;
+  transition: background-color .2s;
+}
+.slidebar li:hover {
+  background: #848484;
+  line-height: 19px;
+  font-size: 13px;
+}
+.slidebar li a {
+  color: #fff;
+}
+.slidebar .rfeedback {
+  background-position: 0 0;
+}
+.slidebar .toback {
+  background-position: 0 -160px;
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
