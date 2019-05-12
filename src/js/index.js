@@ -1,11 +1,11 @@
 (function(){
+
     //轮播图
     //swiper基本款
     var s1 = new Swiper('.swiper-container',{
         simulateTouch : false,
         autoplay : {//自动轮播
             delay : 2000,//间隔时间
-            disableOnInteraction:false//拖拽完后还能继续自动轮播
         },
         loop : true,//无缝 环路
         navigation: {//上下按钮
@@ -34,38 +34,10 @@
     oBox.onmouseout=function(){//鼠标离开就运动
         s1.autoplay.start();
     }   
-     //登录注册 弹窗遮罩
-    $("#login").click(function(){
-        $('.quc-panel').css('display','block');
-        $('.quc-mask').css('display','block');
-    }) 
-    $('.quc-icon-close').click(function(){
-        $('.quc-panel').css('display','none');
-        $('.quc-mask').css('display','none');
-    })
 
-    //登录切换
-    $('.quc-tab-list').on( 'click',"div",function(){
-        $(this).addClass('quc-tab-item-active')
-        $(this).siblings('div').removeClass('quc-tab-item-active');
-        // console.log($(this).children().html());
-        var content = $(this).children().html();
-        if (content) {
-            //短信验证
-            $('.quc-mobile>input').attr('type','mobile').attr('placeholder','手机号').attr('maxlength','11');
-            $('.quc-psw>input').attr('type','smscode').attr('placeholder','短信验证码');
-            $('.quc-input-append').css('display','block');
-        }else{
-            //360账号登录
-            $('.quc-mobile>input').attr('type','userName').attr('placeholder','手机号/用户名/邮箱');
-            $('.quc-psw>input').attr('type','password').attr('placeholder','密码');
-            $('.quc-input-append').css('display','none');
-        }
-    })
+    //登录注册
+    loginResgin();
 
-
-
-    
 
     window.onresize=window.onscroll=function(){
         //浮动二维码
@@ -82,32 +54,9 @@
         15)},100)
 
         //回到顶部
-        //滚动距离:滚动事件里面使用，并且在滚动中才能获取
-        var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;
-        if(scrollTop>=600){
-            //当滚动到300px的时候，盒子显示，否则隐藏
-            $('.toback').css('display','block');
-        }
-        else{
-            $('.toback').css('display','none');
-        }
-        
-        $('.toback').click(function(){
-            //点击缓慢回到顶部
-            var scrollTop=window.setInterval(function(){
-                //pageYOffset获取窗口离上面的距离
-                var pop=window.pageYOffset;
-                if(pop>0){
-                    window.scrollTo(0,pop-1);
-                }
-                else{
-                    window.clearInterval(scrollTop);
-                }
-            },30);            
-        })
+        toTop();
 
     }
-
 
     //关闭浮动二维码
     $('.close-icon').click(function(){
@@ -115,6 +64,187 @@
         $('.small-box').css('display','block');
     })
 
+    //点击热门活动的li 跳转到对应的详情页
+    
+    $('.hot-list').on('click','li',function(){
+        // console.log($(this).attr('data-id'));
+        var id = $(this).attr('data-id')
+        window.open('src/html/details.html?' + id);
+    })
+
+    //d点击热门商品跳转到详情页
+    $('.mod-hodGoods').on('click','li',function(){
+        // console.log($(this).attr('data-id'));
+        var id = $(this).attr('data-id')
+        window.open('src/html/details.html?' + id);
+    })
+
+
+    //首页商品数据渲染
+
+    //ajax发送请求，渲染数据
+    //渲染热门活动
+    $.ajax({
+        type : 'get',
+        url : 'src/api/index.php',
+        data : 'id=1',
+        async : true,
+        success : function(str){
+            var arr = JSON.parse(str);
+            $html = arr.map(function(item) {
+                return `<li data-id="${item.id}">
+                            <a href="javascript:;">
+                                <div class="prd-detail">
+                                    <span class="name">${item.name}</span>
+                                    <span class="price">
+                                        ￥${item.price}
+                                    </span>
+                                </div>
+                                <div class="imgbox">
+                                    <img src="src/img/${item.title}${item.bigimg}.png" height="140" width="140"/>
+                                </div>
+                            </a>
+                        </li>`;
+            }).join('');
+            $(".hot-list").html($html);
+        }
+    })
+
+    
+
+    //热门商品数据渲染
+    
+    //路由器
+    $.ajax({
+        type : 'get',
+        url : 'src/api/index.php',
+        async : true,
+        data : 'id=2',
+        success : function(str){
+            // console.log(str);
+            var arr = JSON.parse(str);
+            $html = arr.map(function(item) {
+                return `<li data-id="${item.id}">
+                            <a href="javascript:;">
+                                <div class="imgbox">
+                                    <img class="js-lazyload" src="src/img/${item.title}${item.bigimg}.jpg">
+                                </div>
+                                <h4 class="proname">${item.name}</h4>
+                                <p class="proprice">¥${item.price}</p>
+                            </a>
+                        </li>`;                    
+            }).join('');
+            console.log($html);
+            $(".luyouqi").html($html);
+        }
+    })
+
+    //儿童守护
+    $.ajax({
+        type : 'get',
+        url : 'src/api/index.php',
+        async : true,
+        data : 'id=3',
+        success : function(str){
+            // console.log(str);
+            var arr = JSON.parse(str);
+            $html = arr.map(function(item) {
+                return `<li data-id="${item.id}">
+                            <a href="javascript:;">
+                                <div class="imgbox">
+                                    <img class="js-lazyload" src="src/img/${item.title}${item.bigimg}.jpg">
+                                </div>
+                                <h4 class="proname">${item.name}</h4>
+                                <p class="proprice">¥${item.price}</p>
+                            </a>
+                        </li>`;                    
+            }).join('');
+            console.log($html);
+            $(".childpro").html($html);
+        }
+    })
+
+    //家庭安防
+     $.ajax({
+        type : 'get',
+        url : 'src/api/index.php',
+        async : true,
+        data : 'id=3',
+        success : function(str){
+            // console.log(str);
+            var arr = JSON.parse(str);
+            $html = arr.map(function(item) {
+                return `<li data-id="${item.id}">
+                            <a href="javascript:;">
+                                <div class="imgbox">
+                                    <img class="js-lazyload" src="src/img/${item.title}${item.bigimg}.jpg">
+                                </div>
+                                <h4 class="proname">${item.name}</h4>
+                                <p class="proprice">¥${item.price}</p>
+                            </a>
+                        </li>`;                    
+            }).join('');
+            console.log($html);
+            $(".familpro").html($html);
+        }
+    })   
+
+    //行车安全
+     $.ajax({
+        type : 'get',
+        url : 'src/api/index.php',
+        async : true,
+        data : 'id=2',
+        success : function(str){
+            // console.log(str);
+            var arr = JSON.parse(str);
+            $html = arr.map(function(item) {
+                return `<li data-id="${item.id}">
+                            <a href="javascript:;">
+                                <div class="imgbox">
+                                    <img class="js-lazyload" src="src/img/${item.title}${item.bigimg}.jpg">
+                                </div>
+                                <h4 class="proname">${item.name}</h4>
+                                <p class="proprice">¥${item.price}</p>
+                            </a>
+                        </li>`;                    
+            }).join('');
+            console.log($html);
+            $(".carsc").html($html);
+        }
+    })       
+
+
+     //扫地机器人
+     $.ajax({
+        type : 'get',
+        url : 'src/api/index.php',
+        async : true,
+        data : 'id=3',
+        success : function(str){
+            // console.log(str);
+            var arr = JSON.parse(str);
+            $html = arr.map(function(item) {
+                return `<li data-id="${item.id}">
+                            <a href="javascript:;">
+                                <div class="imgbox">
+                                    <img class="js-lazyload" src="src/img/${item.title}${item.bigimg}.jpg">
+                                </div>
+                                <h4 class="proname">${item.name}</h4>
+                                <p class="proprice">¥${item.price}</p>
+                            </a>
+                        </li>`;                    
+            }).join('');
+            console.log($html);
+            $(".rab").html($html);
+        }
+    }) 
+
+
+
+
 
 })()
+
+
 

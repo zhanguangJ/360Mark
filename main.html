@@ -7,7 +7,7 @@
     <title>360会员商城</title>
     <link rel="stylesheet" href="src/css/base_px.css">
     <link rel="stylesheet" href="src/css/swiper.css">
-    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/index.css">
     <link rel="stylesheet" href="src/icon/iconfont.css" />
     <style type="text/css">
         .mod-banner{
@@ -63,26 +63,26 @@
             </ul>
             <div class="quc-mask" style="z-index:3999;"></div>
              <!-- 登录注册 -->
-            <!--<div class="quc-panel">
+            <div class="quc-panel quc-login">
                   <div class="quc-hd">
-                    <div class="quc-title">
-                        <div>
-                            <div class="quc-tab-list">
-                               <div class="quc-tab-item quc-tab-item-active">
-                                    <a href="javascript:;" class="quc-tab-item-inner">短信登录</a>
-                                </div>
-                                <div class="quc-tab-item">
-                                    <span class="quc-tab-sep login"></span>
-                                    <a href="javascript:;" class="quc-tab-item-inner">360账号登录</a>
+                        <div class="quc-title">
+                            <div>
+                                <div class="quc-tab-list">
+                                   <div class="quc-tab-item quc-tab-item-active">
+                                        <a href="javascript:;" class="quc-tab-item-inner">短信登录</a>
+                                    </div>
+                                    <div class="quc-tab-item">
+                                        <span class="quc-tab-sep login"></span>
+                                        <a href="javascript:;" class="quc-tab-item-inner">360账号登录</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <a href="javascript:;" class="quc-close">
-                        <i class="quc-icon-close">X</i>
-                    </a>
-                                 </div> 
-                                 <div class="quc-main">
+                        <a href="javascript:;" class="quc-close">
+                            <i class="quc-icon-close">X</i>
+                        </a>
+                    </div> 
+                <div class="quc-main">
                     <div>
                         <div class="quc-login-content">
                             <form class="quc-form">
@@ -105,9 +105,12 @@
                             </form>
                         </div>
                     </div>
-                                 </div> 
-                </div>-->
-            <div class="quc-panel">    
+                </div> 
+            </div>
+
+            <!-- 注册 -->
+
+            <div class="quc-panel quc-panel-large">    
                 <div class="quc-hd">
                     <div class="quc-title">
                         <div>
@@ -132,41 +135,61 @@
                                         <i class='iconfont icon-shouji'></i>
                                     </div>
                                 </div>
-                                 <div class="quc-form-item quc-psw quc-input-has-prefix">
-                                    <input type="smscode" placeholder="验证码"/>
+                                 <div class="quc-form-item quc-input-has-prefix input-val">
+                                    <input id="input-val" type="smscode" placeholder="验证码" maxlength="4" />
+                                    <p class="change">换一张</p>
                                     <div class="quc-input-prefix">
                                         <i class='iconfont icon-dunpaisuo-tianchong'></i>
                                     </div>
+                                    <canvas id="canvas"></canvas>
+                                    <span class='output2'></span>
                                 </div>
-                                <div class="quc-form-item quc-psw quc-input-has-prefix">
+
+                                <div class="quc-form-item quc-input-has-prefix">
                                     <input type="smscode" placeholder="短信验证码"/>
                                     <div class="quc-input-prefix">
                                         <i class='iconfont icon-youjianduanxin'></i>
                                     </div>
+                                    <div class="quc-input-append">
+                                        <span class='quc-link quc-get-token'>获取验证码</span>
+                                    </div>
                                 </div>
-                                <div class="quc-form-item quc-psw quc-input-has-prefix">
+
+                                <div class="quc-form-item quc-input-has-prefix">
                                     <input type="password" placeholder="密码(8-20个字符)"/>
                                     <div class="quc-input-prefix">
                                         <i class='iconfont icon-ziyuanxhdpi'></i>
                                     </div>
                                 </div>
-                                <!--<div class="quc-button-list">
-                                    <input type="submit" value="登录" class="quc-button" />
+
+                                <div class="quc-form-item quc-form-item-checkbox">
+                                    <label>
+                                        <input type="checkbox" />
+                                        阅读并同意
+                                        <a href="javascript:;">
+                                            《360用户服务条款》
+                                        </a>
+                                        和
+                                        <a href="javascript:;">
+                                            《360用户隐私政策》
+                                        </a>
+                                    </label>
+                                </div>
+
+                                <div class="quc-button-list">
+                                    <input type="submit" value="注册" class="quc-button" />
                                 </div>
                                 <div class="quc-form-tips">
-                                    <a href="javascript:;" class="quc-right" target="_blank">找回密码</a>
-                                    <a href="javascript:;" class="quc-left">快速注册</a>
-                                </div> -->
+                                    <div class="quc-right">
+                                        已有账号,
+                                        <a href="javascript:;" class="Direct-login">直接登录</a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
-                    </div>
-                    
+                    </div>                    
                 </div>
-
-
             </div>
-
-
 
 
 
@@ -207,7 +230,7 @@
           <!-- 导航 -->
         <div class="top-nav">
             <ul class="navbar fl">
-                <li class="top-item topfrist"><a href="">全部智能产品</a></li>
+                <li class="top-item topfrist"><a href="src/html/list.html" target="_blank">全部智能产品</a></li>
                 <li><a href="">安全路由</a></li>
                 <li><a href="">儿童手表</a></li>
                 <li><a href="">家庭安防</a></li>
@@ -237,22 +260,21 @@
     </div>
 
     <!-- 轮播图 -->
-    <div class="mod-banner">
+    <div class="mod-banner" id="lunbotu">
         <div class="swiper-container" id="swiper-container" swiper-animate-effect="fadeIn">
-           <div class="swiper-wrapper" >
-               <div class="swiper-slide" ><img  src="src/img/t01cb6dc970f38a3fd5.webp"/></div>
-               <div class="swiper-slide" ><img  src="src/img/t01d8279d8234d1c494.webp"/></div>
-               <div class="swiper-slide" ><img  src="src/img/t01dffc9b38342fe9de.webp"/></div>
-               <div class="swiper-slide" ><img  src="src/img/t018ab717946eeb39b3.webp"/></div>
-               <div class="swiper-slide" ><img  src="src/img/t01733c401ab904d1ef.webp"/></div>
+           <div class="swiper-wrapper">
+               <div class="swiper-slide" ><img src="src/img/lunbotu1.webp"/></div>
+               <div class="swiper-slide" ><img src="src/img/lunbotu2.webp"/></div>
+               <div class="swiper-slide" ><img src="src/img/lunbotu3.webp"/></div>
+               <div class="swiper-slide" ><img src="src/img/lunbotu4.webp"/></div>
+               <div class="swiper-slide" ><img src="src/img/lunbotu5.webp"/></div>
            </div>
-           按钮
+           <!-- 按钮 -->
            <div class="swiper-button-prev"></div>
            <div class="swiper-button-next"></div>
-           分页
+           <!-- 分页 -->
            <div class="swiper-pagination"></div>
        </div>
-        
     </div>
 
     <!-- 主体     -->
@@ -263,45 +285,20 @@
                 <h2 class="tit">热门活动</h2>
             </div>
             <ul class="hot-list">
-                <li class="first">
-                    <a href="javascript:;">
-                        <div class="prd-detail">
-                            <span class="name">360AI音响MAX - M1</span>
-                            <span class="price">
-                                ￥199
-                            </span>
-                        </div>
-                        <div class="imgbox">
-                            <img src="src/img/360AI MAX - M1.png" height="140" width="145"/>
-                        </div>
-                    </a>
-                </li>
-                <li class="two">
-                    <a href="javascript:;">
-                        <div class="prd-detail">
-                            <span class="name">360AI音响MAX - M1</span>
-                            <span class="price">
-                                ￥199
-                            </span>
-                        </div>
-                        <div class="imgbox">
-                            <img src="src/img/360AI MAX - M1.png" height="140" width="145"/>
-                        </div>
-                    </a>
-                </li>
-                <li class="three">
-                    <a href="javascript:;">
-                        <div class="prd-detail">
-                            <span class="name">360AI音响MAX - M1</span>
-                            <span class="price">
-                                ￥199
-                            </span>
-                        </div>
-                        <div class="imgbox">
-                            <img src="src/img/360AI MAX - M1.png" height="140" width="145"/>
-                        </div>
-                    </a>
-                </li>
+ <!--                <li class="first" data-id="1">
+     <a href="javascript:;">
+         <div class="prd-detail">
+             <span class="name">360AI音响MAX - M1</span>
+             <span class="price">
+ ￥199
+             </span>
+         </div>
+         <div class="imgbox">
+             <img src="src/img/360AI MAX - M1.png" height="140" width="140"/>
+         </div>
+     </a>
+ </li>
+ -->
             </ul>
         </div>
         <!-- 限时购 -->
@@ -420,90 +417,36 @@
                         <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
                     </a>                    
                 </div>
-                <ul class="prod-list">
-                    <li>
-                        <a href="">
+                <ul class="prod-list luyouqi">
+                    <!-- <li>
+                        <a href="javascript:;">
                             <div class="imgbox">
                                 <img class="js-lazyload" src="src/img/louyouqi1.png">
                             </div>
                             <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
                             <p class="proprice">¥199</p>
                         </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <!-- 儿童守护 -->
             <div class="mod-bd">
-    <div class="prod-tit">
-        <a href="javascript:;">
-            <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
-        </a>                    
-    </div>
-    <ul class="prod-list">
-        <li>
-            <a href="">
-                <div class="imgbox">
-                    <img class="js-lazyload" src="src/img/louyouqi1.png">
+                <div class="prod-tit">
+                    <a href="javascript:;">
+                        <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
+                    </a>                    
                 </div>
-                <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                <p class="proprice">¥199</p>
-            </a>
-        </li>
-        <li>
-            <a href="">
-                <div class="imgbox">
-                    <img class="js-lazyload" src="src/img/louyouqi1.png">
-                </div>
-                <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                <p class="proprice">¥199</p>
-            </a>
-        </li>
-        <li>
-            <a href="">
-                <div class="imgbox">
-                    <img class="js-lazyload" src="src/img/louyouqi1.png">
-                </div>
-                <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                <p class="proprice">¥199</p>
-            </a>
-        </li>
-        <li>
-            <a href="">
-                <div class="imgbox">
-                    <img class="js-lazyload" src="src/img/louyouqi1.png">
-                </div>
-                <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                <p class="proprice">¥199</p>
-            </a>
-        </li>
-    </ul>
+                <ul class="prod-list childpro">
+                  <!--   <li>
+                            <a href="javascript:;">
+                                <div class="imgbox">
+                                    <img class="js-lazyload" src="src/img/louyouqi1.png">
+                                </div>
+                                <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
+                                <p class="proprice">¥199</p>
+                            </a>
+                        </li> -->
+                </ul>
             </div>
             <!-- 家庭安防 -->
             <div class="mod-bd">
@@ -512,43 +455,16 @@
                         <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
                     </a>                    
                 </div>
-                <ul class="prod-list">
-                    <li>
-                        <a href="">
+                <ul class="prod-list familpro">
+                    <!-- <li>
+                        <a href="javascript:;">
                             <div class="imgbox">
                                 <img class="js-lazyload" src="src/img/louyouqi1.png">
                             </div>
                             <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
                             <p class="proprice">¥199</p>
                         </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <!-- 行车安全 -->
@@ -558,43 +474,16 @@
                         <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
                     </a>                    
                 </div>
-                <ul class="prod-list">
-                    <li>
-                        <a href="">
+                <ul class="prod-list carsc">
+                    <!-- <li>
+                        <a href="javascript:;">
                             <div class="imgbox">
                                 <img class="js-lazyload" src="src/img/louyouqi1.png">
                             </div>
                             <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
                             <p class="proprice">¥199</p>
                         </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <!-- 扫地机器人 -->
@@ -604,43 +493,16 @@
                         <img src="src/img/t01866ce2c85f29efd5.png" alt="" />
                     </a>                    
                 </div>
-                <ul class="prod-list">
-                    <li>
-                        <a href="">
+                <ul class="prod-list rab">
+                    <!-- <li>
+                        <a href="javascript:;">
                             <div class="imgbox">
                                 <img class="js-lazyload" src="src/img/louyouqi1.png">
                             </div>
                             <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
                             <p class="proprice">¥199</p>
                         </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="imgbox">
-                                <img class="js-lazyload" src="src/img/louyouqi1.png">
-                            </div>
-                            <h4 class="proname">【新品】360家庭防火墙路由器5S</h4>
-                            <p class="proprice">¥199</p>
-                        </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
@@ -733,6 +595,8 @@
 
 </body>
 <script src="src/lib/jquery-1.10.1.min.js"></script>
+<!-- <script src="src/js/lunbotu.js"> </script> -->
 <script src="src/lib/swiper.min.js"></script>
+<script src="src/js/base.js"></script>
 <script src="src/js/index.js"></script>
 </html>

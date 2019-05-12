@@ -70,7 +70,7 @@ body{
     }
     .small-box{
         position:absolute;
-        top:0;
+        top:40px;
         right:23px;        
         width:101px;
         cursor:pointer;
@@ -105,22 +105,21 @@ body{
     bottom:0;
     background:#000;
     opacity:.3;
-    // display:none;
+    display:none;
 }
 
 // 登录
 .quc-panel{
     z-index:4000;
     width:360px;
-    height:439px;
     position:fixed;
     background:#fff;
     border-radius:4px;
-    top:50%;
+    top:40%;
     left:50%;
     margin-left:-180px;
     margin-top:-166px;
-    // display:none;
+    display:none;
 }
 .quc-hd{
     padding-top: 40px;
@@ -231,7 +230,7 @@ body{
     color:#6f6f6f;
     float:right;
 }
-.quc-form-tips .quc-right:hover{
+.quc-form-tips .quc-right:hover a{
     color:#36b447;
 }
 .quc-form-tips .quc-left{
@@ -241,8 +240,25 @@ body{
 .quc-form-tips .quc-left:hover{
     color:#36b447;
 }
+.quc-psw{
+    .quc-input-append{
+        top:1px;
+        right:1px;
+    }
+}
+
 
 //注册
+.quc-panel-large{
+    width:450px;
+    display:none;
+    input{
+        width:338px;
+    }
+    .quc-tab-list{
+        color:#36b447;
+    }
+}
 .quc-input-prefix{
     position:absolute;
     top:1px;
@@ -256,8 +272,65 @@ body{
 }
 .quc-input-has-prefix input{
     padding-left:40px;
-    width:238px;
+    width:278px;
 }
+
+.input-val input{
+    width:90px;
+}
+.input-val{
+    width:330px;
+    p{
+        float:right;
+        line-height:42px;
+        margin-left:20px;
+        cursor:pointer;
+        color:#36b447;
+    }
+}
+.quc-input-has-prefix{
+    .quc-input-append{
+        top:1px;
+        right:-29px;
+
+    }
+}
+
+// 随机验证码
+#canvas{
+    float:right;
+    display: inline-block;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left:10px;
+    width:100px;
+    height:42px;
+}
+
+.quc-form-item-checkbox{
+    color:#6f6f6f;
+    font-size:12px;
+    margin-bottom:0;
+    width:338px;
+    input{
+        margin-right:5px;
+        vertical-align: middle;
+        margin-bottom:1px;
+        width:12px;
+    }
+    a{
+        color:#36b447;
+    }
+}
+
+.quc-right{
+    float:right;
+    a{
+        color:#36b447;
+    }
+}
+
 
 
 /* logo 加搜索区 */
@@ -423,19 +496,6 @@ body{
 .hot-list{
     margin:0 auto;
     box-sizing:border-box;
-    .first{
-        background-color:#e45f61;
-        background:linear-gradient(90deg,#e45f61,#ff8183);
-    }
-    .two{
-        background-color:#fed23d;
-        background:linear-gradient(90deg,#ff9c0a,#fed23d);
-    }
-    .three{
-        background-color:#33d9f2;
-        background:linear-gradient(90deg,#03bad5,#33d9f2);
-        margin-right:0;
-     }
     li{
         float:left;
         margin-right:15px;
@@ -479,6 +539,21 @@ body{
         }
     }
 }
+.hot-list:nth-of-type(1){
+    background-color:#e45f61;
+    background:linear-gradient(90deg,#e45f61,#ff8183);
+}
+.hot-list:nth-of-type(2){
+    background-color:#fed23d;
+    background:linear-gradient(90deg,#ff9c0a,#fed23d);
+}
+.hot-list:nth-of-type(3){
+    background-color:#33d9f2;
+    background:linear-gradient(90deg,#03bad5,#33d9f2);
+    margin-right:0;
+}
+
+
 /* 限时购 */
 .mod-timeToBuy{
     height: 470px;
@@ -641,6 +716,7 @@ body{
                 padding:33px 19px 20px;
                 background:#fff;
                 width:200px;
+                height:248px;
                 text-align:center;
                 a{
                     font-size:14px;  

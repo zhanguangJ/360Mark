@@ -155,6 +155,245 @@ body {
   color: #23ac38;
 }
 
+
+
+//遮罩
+.quc-mask{
+    position: fixed;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background:#000;
+    opacity:.3;
+    display:none;
+}
+
+// 登录
+.quc-panel{
+    z-index:4000;
+    width:360px;
+    position:fixed;
+    background:#fff;
+    border-radius:4px;
+    top:40%;
+    left:50%;
+    margin-left:-180px;
+    margin-top:-166px;
+    display:none;
+}
+.quc-hd{
+    padding-top: 40px;
+    text-align: center;
+    
+}
+.quc-title{
+    font-weight: 500;
+}
+.quc-tab-list{
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;;
+}
+.quc-tab-item{
+    float:left;
+}
+.quc-tab-item a{
+    color:#333;
+}
+.quc-tab-list .quc-tab-item-active .quc-tab-item-inner{
+    color:#36b447;
+    border-bottom: 1px solid #36b447;
+}
+.quc-title .quc-tab-sep{
+    margin:2px 16px 0;
+    height:16px;
+    border-right: 1px solid #e3e3e3;
+    float:left;
+}
+.quc-tab-item-inner{
+    float:left;
+    padding-bottom: 4px;
+}
+.quc-tab-item-inner:hover{
+    color:#36b447;
+}
+.quc-close{
+    position:absolute;
+    right:20px;
+    top:20px;
+    color:#d2d0d0;
+    font-size: 16px;
+    cursor:pointer;
+}
+.quc-main{
+    margin:0 auto;
+    padding-top:30px;
+    padding-bottom: 30px;
+    width:300px;
+}
+.quc-main input{
+    width:278px;
+    border-radius: 2px;
+    border:1px solid #ddd;
+    display:inline-block;
+    color:#333;
+    height:20px;
+    line-height: 20px;
+    padding: 10px;
+}
+.quc-form-item{
+    margin-bottom:20px;
+    position:relative;
+}
+.quc-input-append{
+    right:31px;
+    background:#fafafa;
+    border-left:1px solid #ddd;
+    width:120px;
+    position:absolute;
+    top:158px;
+    height:40px;
+    text-align:center;
+    line-height: 40px;
+    color:#ccc;
+}
+.quc-get-token{
+    color:#36b447;
+    cursor:pointer;
+}
+.quc-button-list{
+    margin-top: 10px;
+}
+.quc-button{
+    font-size: 18px;
+    background:#36b447;
+    border-color: #36b447;
+    color:#fff;
+}
+.quc-button-list input{
+    width:300px;
+    border-radius: 2px;
+    border:1px solid #ddd;
+    display:inline-block;
+    color:#fff;
+    height:40px;
+    padding:10px;
+}
+.quc-form-tips{
+    margin-top: 10px;
+    color:#6f6f6f;
+    font-size:14px;
+}
+.quc-form-tips .quc-right{
+    color:#6f6f6f;
+    float:right;
+}
+.quc-form-tips .quc-right:hover a{
+    color:#36b447;
+}
+.quc-form-tips .quc-left{
+    color:#6f6f6f;
+    float:left;
+}
+.quc-form-tips .quc-left:hover{
+    color:#36b447;
+}
+.quc-psw{
+    .quc-input-append{
+        top:1px;
+        right:1px;
+    }
+}
+
+
+//注册
+.quc-panel-large{
+    width:450px;
+    display:none;
+    input{
+        width:338px;
+    }
+    .quc-tab-list{
+        color:#36b447;
+    }
+}
+.quc-input-prefix{
+    position:absolute;
+    top:1px;
+    left:1px;
+    width:40px;
+    text-align:center;
+    height:40px;
+    line-height:40px;
+    color:#ccc;
+    
+}
+.quc-input-has-prefix input{
+    padding-left:40px;
+    width:278px;
+}
+
+.input-val input{
+    width:90px;
+}
+.input-val{
+    width:330px;
+    p{
+        float:right;
+        line-height:42px;
+        margin-left:20px;
+        cursor:pointer;
+        color:#36b447;
+    }
+}
+.quc-input-has-prefix{
+    .quc-input-append{
+        top:1px;
+        right:-29px;
+
+    }
+}
+
+// 随机验证码
+#canvas{
+    float:right;
+    display: inline-block;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left:10px;
+    width:100px;
+    height:42px;
+}
+
+.quc-form-item-checkbox{
+    color:#6f6f6f;
+    font-size:12px;
+    margin-bottom:0;
+    width:338px;
+    input{
+        margin-right:5px;
+        vertical-align: middle;
+        margin-bottom:1px;
+        width:12px;
+    }
+    a{
+        color:#36b447;
+    }
+}
+
+.quc-right{
+    float:right;
+    a{
+        color:#36b447;
+    }
+}
+
+
+
 /* 导航 */
 .top-nav {
   width: 100%;
@@ -387,21 +626,31 @@ body {
 .addbtns{
     text-align:center;
     .add-cart{
-        border:1px solid #fc32d;
+        display:none;
         padding-left:15px;
         width:105px;
-        display:none;
         font-size:12px;
         height:28px;
         line-height:28px;
-        margin-top:10px;
+        margin:10px auto 0;
+        color:#fa5437;
+        background:#fff url(../img/shopcart.png) no-repeat 14px 7px;
+        background-size:15px;
+        border:1px solid #fa5437;
         &:hover{
-            background:#fc522c url(../img/shopcart.png) no-repeat 14px 7px;
+            background:#fc522c url(../img/shopcart2.png) no-repeat 14px 7px;
             background-size:15px;
             color:#fff;
         }
     }
 }
+.list-box .listwrap .list .list-item:hover{
+  border:1px solid #fc522c;
+}
+.list-box .listwrap .list .list-item:hover .add-cart{
+  display:block;
+}
+
 .addSuccess{
     position:absolute;
     z-index:10;
