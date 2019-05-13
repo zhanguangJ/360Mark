@@ -1,5 +1,40 @@
 (function(){
 
+    //下拉搜索数据渲染
+    function search(){
+        var p = new Promise(function(succfn){
+            $.ajax({
+                type : 'get',
+                url : 'src/api/index.php',
+                async : true,
+                data : {
+                    id : 55,
+                    time : new Date()
+                },
+                success : function(str){
+                    succfn(str);
+                }
+            })
+        })
+        p.then(function(str){
+            var arr = JSON.parse(str);
+            $html = arr.map(function(item) {
+                return `<li data-name="${item.name}" class="">
+                            <div class="sug-item">
+                                ${item.name}
+                            </div>
+                            <div class="desc">约有${item.sum}件</div>
+                        </li>`;                    
+            }).join('');
+            $(".__mall_suggest__").html($html);        
+        }).then(function(){
+            //下拉搜索
+            find();            
+        })
+    }
+    //下拉搜索菜单
+    search();
+
     //轮播图
     //swiper基本款
     var s1 = new Swiper('.swiper-container',{
@@ -40,7 +75,7 @@
 
 
     window.onresize=window.onscroll=function(){
-        //浮动二维码
+    //浮动二维码
         var csFloor = document.getElementsByClassName("fixed-code")[0];
         var iScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         setTimeout(function() {
@@ -64,13 +99,133 @@
         $('.small-box').css('display','block');
     })
 
-    //点击热门活动的li 跳转到对应的详情页
-    
+
+    timeToBuy();
+    //限时购
+    function timeToBuy(){
+        var endTime = new Date("2019-05-13 10:00:00");
+        //把年月日时分秒的时间转换成为毫秒数
+        endSeconds = endTime.getTime();//结束时间的毫秒数
+        //定义变量  天数 小时 分钟  秒数  
+        var d = h = m = s =  0;
+        //设置定时器  实现一个秒杀效果
+        var timer = setInterval(qiang,1000);
+        
+        function qiang(){
+            // 获取当前系统时间
+            var nowTime = new Date();
+            // 获取当前时间差---nowTime.getTime()现在时间的毫秒数
+            var remain = parseInt((endSeconds-nowTime.getTime())/1000);
+            //判断秒杀是否过期
+            if(remain>0){
+                //1.计算剩余天数  （除以60*60*24  取整数  获取剩余天数）
+                d = parseInt(remain/86400)
+                //2.计算剩余小时（除以60*60 转换成为小时了  与24进行取模   获取剩余小时）
+                h = parseInt((remain/3600) % 24);
+                //3.计算剩余分钟（除以60  转换成为分钟了  与60进行取模   获取剩余分钟）
+                m = parseInt((remain/60) % 60);
+                //4.计算剩余秒数（与60进行取模   获取剩余秒数）
+                s = parseInt((remain) % 60);
+                
+                //统一利用两位数 表示 剩余的天、小时、分钟、秒
+                d= d < 10 ? '0' + d:d;
+                h= h < 10 ? '0' + h:h;
+                m= m < 10 ? '0' + m:m;
+                s= s < 10 ? '0' + s:s;
+                
+            }else{
+                // 秒杀过期  清除老的定时器 开启新一轮定时器 
+                clearInterval(timer);
+                //开启新的定时器   12个小时
+                endSeconds = endSeconds + 43200000;
+                timer = setInterval(qiang,1000);
+                // d = h = m = s = '00' 
+            }
+            //将剩余的天数、小时、分钟、秒  小时到指定网页中去
+            $('.countdown span').eq(0).html(h);
+            $('.countdown span').eq(2).html(m);
+            $('.countdown span').eq(4).html(s);
+        }
+
+    }
+
+    //限时购商品数据渲染
+    $.ajax({
+        type : 'get',
+        url : 'src/api/index.php',
+        data : {
+            id : 99,
+            time : new Date()
+        },
+        async : true,
+        success : function(str){
+            var arr = JSON.parse(str);
+            $html = arr.map(function(item) {
+                return `<li class="kill-item">
+                            <div class="kill-item-box">
+                                <div class="prod-img">
+                                        <img src="src/img/${item.title}${item.bigimg}.jpg">
+                                </div>
+                                <div class="text-box">
+                                    <p class="name">${item.name}</p>
+                                    <p class="price">
+                                        <b class="cur-price">￥${item.newprice}</b>
+                                        <del>￥${item.oldprice}</del>
+                                    </p>
+                                    <p class="info">
+                                        <span class="num"></span>
+                                        <a href="javascript:;" class="killbtn ${item.classNa}"  data-id="${item.dataId}">${item.qiang}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>`;
+            }).join('');
+            $(".kill-list").html($html);
+        }
+    })
+
+    //限时购跳转详情页
+    $(".kill-list").on('click', '.abled', function() {
+        var id = $(this).attr('data-id')
+        window.open('src/html/details.html?' + id);        
+    });
+
+
+    //点击导航旁边的字跳转到列表页
+    $('.navbar').on('click', 'li', function() {
+        if ($(this).attr('data-name')) {
+            var name = $(this).attr('data-name')
+            window.open('src/html/list.html?' + name);        
+        };
+    });
+
+    //点击中文跳转就对了
+    $('.searchKey').on('click','a',function(){
+        // console.log($(this).attr('data-id'));
+        var id = $(this).attr('data-id')
+        window.open('src/html/details.html?' + id);
+    })   
+
+    //点击轮播图跳转
+    $('#lunbotu').on('click','img',function(){
+        // console.log($(this).attr('data-id'));
+        var id = $(this).attr('data-id')
+        window.open('src/html/details.html?' + id);
+    })       
+
+    //点击热门活动的li 跳转到对应的详情页   
     $('.hot-list').on('click','li',function(){
         // console.log($(this).attr('data-id'));
         var id = $(this).attr('data-id')
         window.open('src/html/details.html?' + id);
     })
+
+    //点击人们商品的广告跳转到列表页
+    $('.mod-hodGoods').on('click','.prod-tit',function(){
+        // console.log($(this).attr('data-name'));
+        var name = $(this).attr('data-name')
+        window.open('src/html/list.html?' + name);
+    })    
 
     //d点击热门商品跳转到详情页
     $('.mod-hodGoods').on('click','li',function(){
@@ -87,7 +242,10 @@
     $.ajax({
         type : 'get',
         url : 'src/api/index.php',
-        data : 'id=1',
+        data : {
+            id : 1,
+            time : new Date()
+        },
         async : true,
         success : function(str){
             var arr = JSON.parse(str);
@@ -110,16 +268,16 @@
         }
     })
 
-    
-
-    //热门商品数据渲染
-    
+//热门商品数据渲染
     //路由器
     $.ajax({
         type : 'get',
         url : 'src/api/index.php',
         async : true,
-        data : 'id=2',
+        data : {
+            id : 2,
+            time : new Date()
+        },
         success : function(str){
             // console.log(str);
             var arr = JSON.parse(str);
@@ -134,7 +292,6 @@
                             </a>
                         </li>`;                    
             }).join('');
-            console.log($html);
             $(".luyouqi").html($html);
         }
     })
@@ -144,7 +301,10 @@
         type : 'get',
         url : 'src/api/index.php',
         async : true,
-        data : 'id=3',
+        data : {
+            id : 3,
+            time : new Date()
+        },
         success : function(str){
             // console.log(str);
             var arr = JSON.parse(str);
@@ -159,7 +319,6 @@
                             </a>
                         </li>`;                    
             }).join('');
-            console.log($html);
             $(".childpro").html($html);
         }
     })
@@ -169,7 +328,10 @@
         type : 'get',
         url : 'src/api/index.php',
         async : true,
-        data : 'id=3',
+        data : {
+            id : 4,
+            time : new Date()
+        },
         success : function(str){
             // console.log(str);
             var arr = JSON.parse(str);
@@ -184,7 +346,6 @@
                             </a>
                         </li>`;                    
             }).join('');
-            console.log($html);
             $(".familpro").html($html);
         }
     })   
@@ -194,7 +355,10 @@
         type : 'get',
         url : 'src/api/index.php',
         async : true,
-        data : 'id=2',
+        data : {
+            id : 2,
+            time : new Date()
+        },
         success : function(str){
             // console.log(str);
             var arr = JSON.parse(str);
@@ -209,20 +373,21 @@
                             </a>
                         </li>`;                    
             }).join('');
-            console.log($html);
             $(".carsc").html($html);
         }
     })       
 
 
-     //扫地机器人
-     $.ajax({
+    //扫地机器人
+    $.ajax({
         type : 'get',
         url : 'src/api/index.php',
         async : true,
-        data : 'id=3',
+        data : {
+            id : 3,
+            time : new Date()
+        },
         success : function(str){
-            // console.log(str);
             var arr = JSON.parse(str);
             $html = arr.map(function(item) {
                 return `<li data-id="${item.id}">
@@ -235,12 +400,9 @@
                             </a>
                         </li>`;                    
             }).join('');
-            console.log($html);
             $(".rab").html($html);
         }
     }) 
-
-
 
 
 

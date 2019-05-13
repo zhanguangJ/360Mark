@@ -114,9 +114,9 @@ function randomColor() {//得到随机的颜色值
 }
 
 
+//登录注册 弹窗遮罩
+//点击登录 出现登录弹窗界面
 function loginResgin(){
-         //登录注册 弹窗遮罩
-     //点击登录 出现登录弹窗界面
     $("#login").click(function(){
         $('.quc-login').css('display','block');//登录界面
         $('.quc-panel-large').css('display','none');//注册界面
@@ -143,7 +143,8 @@ function loginResgin(){
     $("#resgin").click(function(){
         $('.quc-login').css('display','none');//登录界面
         $('.quc-mask').css('display','block');//遮罩    
-        $('.quc-panel-large').css('display','block');//注册界面             
+        $('.quc-panel-large').css('display','block');//注册界面   
+        $('.quc-input-append').css('display','block');         
     })
 
     //点击直接登录
@@ -174,4 +175,63 @@ function loginResgin(){
             $('.quc-input-append').css('display','none');
         }
     })
+}
+
+//注册验证
+
+
+//下拉搜索框
+function find(){
+    //点击搜索框出项下拉菜单
+    $(".text").click(function(ev){
+        $(".__mall_suggest__").css("display",'block');
+        ev.stopPropagation();
+    })
+
+    //点击那个li就跳转到列表页
+    $(".__mall_suggest__").on('click', 'li', function() {
+        var name = $(this).attr('data-name')
+        window.open('src/html/list.html?' + name);
+    });
+
+    //键盘事件
+    //在文档加载后激活函数
+    var index = -1;
+    //li的长度
+    var lisize = $(".__mall_suggest__ li").size();
+    $(document).ready(function() {
+        $(".text").keydown(function(ev) {
+            //往下走
+            if (ev.keyCode === 40) {
+                index ++;
+                for(var i = 0; i < lisize; i++){
+                    $(".__mall_suggest__ li").eq(i).removeClass('active');
+                }
+                if (index > lisize-1) {
+                    index = 0;
+                };
+                $(".__mall_suggest__ li").eq(index).addClass('active');
+            };
+            //往上走
+            if (ev.keyCode === 38) {
+                index --;
+                for(var i = 0; i < lisize; i++){
+                    $(".__mall_suggest__ li").eq(i).removeClass('active');
+                }
+                if (index < 0) {
+                    index = lisize-1;
+                };
+                $(".__mall_suggest__ li").eq(index).addClass('active');
+            };
+            if (ev.keyCode === 13) {
+                var name = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
+                window.open('src/html/list.html?' + name);
+            };
+        });
+    });
+
+    $(document).click(function(){
+        $(".__mall_suggest__").css("display",'none');
+    })
+
 }

@@ -361,11 +361,11 @@ body {
 
 .searchKey a {
   color: #6d6d6d;
-  font-size: 14px;
+  font-size: 12px;
   margin-right: 7px; }
 
 .searchKey a:hover {
-  color: #23ac38; }
+  color: #ed3714; }
 
 /* 导航 */
 .top-nav {

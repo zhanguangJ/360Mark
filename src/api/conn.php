@@ -6,7 +6,7 @@
 	$severname = 'localhost';//主机名
 	$username = 'root';//数据库登陆名
 	$dbpsw = '';//数据库登陆密码，默认为空
-	$dbname = 'h51903';//数据库名字
+	$dbname = '360';//数据库名字
 	
 	//2。创建链接
 	$conn = new mysqli($severname,$username,$dbpsw,$dbname);
@@ -23,6 +23,7 @@
     } 
 //	echo '连接成功';
 	
+	// mysqli_set_charset($conn,"utf8");
 //	$res->close();//关闭结果集
 //	$conn->close();//关闭数据库
 ?>

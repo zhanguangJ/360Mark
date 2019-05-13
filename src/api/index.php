@@ -5,16 +5,25 @@
      $id = isset($_GET['id']) ? $_GET['id'] : '';
 
     //sql语句
-    if ($id ==1 ) {
+    if ($id == 1) {
         $sql = "SELECT * FROM hotgoods";
     }else if($id == 2){
         $sql = "SELECT * FROM shangpin LIMIT 3,4";
     }else if($id == 3){
         $sql = "SELECT * FROM shangpin LIMIT 7,4";
+    }else if($id == 4){
+        $sql = "SELECT * FROM shangpin LIMIT 11,4";
+    }else if($id == 55){
+        $sql = "SELECT * FROM searchbox";
+    }else if($id == 99){
+        $sql = "SELECT * FROM timetobuy";
+    }else if($id == 100){
+        $sql = "SELECT * FROM shangpin";
     }
     else {
         $sql = "SELECT * FROM shangpin LIMIT 3,10000000";
     }
+    
     
     
 
