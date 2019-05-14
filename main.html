@@ -52,17 +52,53 @@
         <!-- 顶部 -->
         <div class="topbox">
             <ul class="con">
-                <li class="topbox-item fl"><a href="javascript:;">帮助中心</a></li> 
-                 <li class="topbox-item fl"><a class="js-connect" href="javascript:;">收藏本站</a></li> 
-                <li class="topbox-item fl">
-                    <a href="javascript:; " id="login">登录</a>
-                    <a href="javascript:; " id="resgin">注册</a>
+                <li class="topbox-item fl help"><a href="javascript:;">帮助中心</a></li> 
+                <li class="topbox-item fl"><a class="js-connect" href="javascript:;">收藏本站</a></li> 
+                <li class="topbox-item fr codebtn">
                     <i></i>
                     <a class="js-connect" href="javascript:;">手机360商城</a>
                 </li>
+                <li class="topbox-item fr topNavMyOrder" style="margin-right:50px;"><a href="javascript:;">我的订单</a></li>
+                <li class="topbox-item fr navloginbox">
+                    <div class="loginbefore nloginWrap">
+                        <a href="javascript:; " id="login">登录</a>
+                        <a href="javascript:; " id="resgin">注册</a>                      
+                    </div>
+                    <div class="loginafter loginWrap">
+                        <!-- <span class="top-uname popUsername">
+                            123456789000
+                        </span>
+                        <div class="popbox">
+                            <a href="javascript:;" class="top-uname popUsername">12345678000</a>
+                            <ul class="topuserbox" >
+                                <li>
+                                    <a href="javascript:;">我的订单</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">我的优惠券</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">我的喜欢</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">我的积分</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">收货地址</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">账号设置</a>
+                                </li>
+                                <li class="quit">
+                                    <a href="javascript:;">退出登录</a>
+                                </li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </li>
             </ul>
             <div class="quc-mask" style="z-index:3999;"></div>
-             <!-- 登录注册 -->
+             <!-- 登录 -->
             <div class="quc-panel quc-login">
                   <div class="quc-hd">
                         <div class="quc-title">
@@ -85,7 +121,7 @@
                 <div class="quc-main">
                     <div>
                         <div class="quc-login-content">
-                            <form class="quc-form">
+                            <form class="quc-form log-in">
                                 <div class="quc-form-item quc-mobile">
                                     <input type="mobile" placeholder="手机号" maxlength="11" />
                                 </div>
@@ -96,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="quc-button-list">
-                                    <input type="submit" value="登录" class="quc-button" />
+                                    <input type="button" value="登录" class="quc-button" />
                                 </div>
                                 <div class="quc-form-tips">
                                     <a href="javascript:;" class="quc-right" target="_blank">找回密码</a>
@@ -128,9 +164,10 @@
                 <div class="quc-main">
                     <div>
                         <div class="quc-login-content">
-                            <form class="quc-form">
+                            <form class="quc-form phoneRegister">
                                 <div class="quc-form-item quc-mobile quc-input-has-prefix">
                                     <input type="mobile" placeholder="手机号" maxlength="11" />
+                                    <span></span>
                                     <div class="quc-input-prefix">
                                         <i class='iconfont icon-shouji'></i>
                                     </div>
@@ -157,6 +194,7 @@
 
                                 <div class="quc-form-item quc-input-has-prefix">
                                     <input type="password" placeholder="密码(8-20个字符)"/>
+                                    <span></span>
                                     <div class="quc-input-prefix">
                                         <i class='iconfont icon-ziyuanxhdpi'></i>
                                     </div>
@@ -177,7 +215,7 @@
                                 </div>
 
                                 <div class="quc-button-list">
-                                    <input type="submit" value="注册" class="quc-button" />
+                                    <input type="button" value="注册" class="quc-button" />
                                 </div>
                                 <div class="quc-form-tips">
                                     <div class="quc-right">
@@ -204,12 +242,38 @@
                 <input type="button" class="search">
     
             </div>
-            <div class="top-showCart fl">
+            <div class="topshopcart fl">
                 <a href="javascript:;">
                     <i class="icon"></i>
                     我的购物车
                     <span>(0)</span>
-                </a>                
+                </a>
+                <div class="header-cart-popup pop-show-tip">
+                    <div class="cart-tips">
+                        请<a href="javascript:;" class="tip-login">
+                            登录
+                        </a>
+                        后查看您的购物车
+                    </div>
+                    <div class="cart-info">
+                        <ul class="cart-list">
+                            <li class="cart-item">
+                                <a href="javascript:;">
+                                    <img src="src/img/luyouP41.jpg">
+                                        <span class="cart-item-text">
+                                            <strong>【特惠套装】360AI音箱MAX－M1+360可视门铃套装</strong>
+                                        </span>
+                                </a>
+                                <span class="cart-item-price">
+                                    <span class="yen">¥</span>
+                                    748.00
+                                </span>
+                                <span class="cart-item-num"> ×1</span>
+                                <a class="cart-item-del" href="javascript:;"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>              
             </div>
             <!-- 二维码 -->
             <div class="top-QRcode">

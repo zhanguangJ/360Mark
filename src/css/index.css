@@ -14,38 +14,98 @@ body {
   box-sizing: border-box;
 }
 
-.topbox ul {
-  height: 45px;
-  padding-left: 13px;
-}
-
 .topbox ul > li > a {
   color: #999999;
   font-size: 12px;
   line-height: 45px;
 }
 
-.topbox ul > li:nth-child(1) {
+.help {
   margin-right: 25px;
   margin-left: 13px;
-}
-
-.topbox ul li:nth-of-type(2) {
-  margin-right: 880px;
-}
-
-.topbox ul li:nth-of-type(3) a {
-  margin-left: 30px;
 }
 
 .topbox ul li:nth-of-type(3) i {
   position: absolute;
   top: 15px;
-  right: 216px;
+  right: 75px;
   width: 22px;
   height: 15px;
   background: url(../img/head-icons.png) no-repeat -2px -268px;
   animation: rotateme .3s infinite;
+}
+
+.loginbefore {
+  margin: 0 10px;
+}
+.loginbefore a {
+  color: #999999;
+  font-size: 12px;
+  line-height: 45px;
+}
+.loginbefore a:hover {
+  color: #23ac38;
+}
+
+.codebtn {
+  position: relative;
+}
+
+.navloginbox {
+  position: relative;
+  right: 20px;
+}
+
+.loginafter {
+  display: none;
+}
+.loginafter .top-uname {
+  width: 120px;
+  display: block;
+  height: 45px;
+  line-height: 45px;
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+.loginafter .top-uname:after {
+  display: inline-block;
+  margin-left: 5px;
+  content: "";
+  width: 10px;
+  height: 6px;
+  background: url(../img/head-icons.png) no-repeat -3px -223px;
+}
+.loginafter:hover .popbox {
+  display: block;
+}
+
+.popbox {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 111;
+  background: #fff;
+  box-shadow: 0 3px 6px black;
+  padding-bottom: 10px;
+  display: none;
+}
+.popbox .topuserbox li {
+  display: block;
+  text-align: center;
+  margin-right: 0;
+  margin-left: 0;
+}
+.popbox .topuserbox li:hover {
+  background: #f7f7f7;
+}
+.popbox .topuserbox li a {
+  display: block;
+  color: #31373c;
+}
+.popbox .top-uname {
+  color: #23ac38;
 }
 
 @keyframes rotateme {
@@ -399,7 +459,7 @@ body {
   cursor: pointer;
 }
 
-.top-showCart {
+.topshopcart {
   float: left;
   position: relative;
   border: 1px solid #DDDDDD;
@@ -412,8 +472,11 @@ body {
   font-size: 12px;
   margin-left: 34px;
 }
+.topshopcart:hover .header-cart-popup {
+  display: block;
+}
 
-.top-showCart .icon {
+.topshopcart .icon {
   display: inline-block;
   width: 20px;
   height: 15px;
@@ -421,11 +484,11 @@ body {
   background: url(../img/head-icons.png) 0 0 no-repeat;
 }
 
-.top-showCart a {
+.topshopcart a {
   color: #000;
 }
 
-.top-showCart a span {
+.topshopcart a span {
   color: #6D6D6D;
 }
 
@@ -447,6 +510,96 @@ body {
 
 .searchKey a:hover {
   color: #ed3714;
+}
+
+.topshopcart .header-cart-popup {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 42px;
+  background: #fff;
+  z-index: 101;
+  width: 380px;
+  font-size: 12px;
+  margin-top: -1px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.topshopcart .pop-show-tip .cart-tips {
+  display: block;
+}
+
+.topshopcart .cart-tips {
+  padding: 40px 0;
+  text-align: center;
+  color: #666;
+  display: none;
+}
+
+.topshopcart .pop-show-tip .cart-tips a {
+  color: #23ac38;
+}
+
+.topshopcart .pop-show-tip .cart-info {
+  display: none;
+}
+
+.topshopcart .cart-list {
+  padding: 6px 12px;
+  display: block;
+}
+
+.topshopcart .cart-item:first-child {
+  border-top: none;
+}
+
+.topshopcart .cart-item {
+  display: block;
+  height: 72px;
+  line-height: 72px;
+  padding: 6px 0;
+  border-top: 1px solid #ddd;
+}
+
+.topshopcart .cart-item img {
+  display: inline-block;
+  width: 72px;
+  height: 72px;
+  float: left;
+}
+
+.topshopcart .cart-item .cart-item-text {
+  float: left;
+  color: #666;
+  padding-left: 15px;
+  width: 140px;
+  line-height: 20px;
+  max-height: 72px;
+  overflow: hidden;
+}
+
+.topshopcart .cart-item .cart-item-price {
+  float: left;
+  color: #333;
+  height: 100%;
+  width: 75px;
+  text-align: right;
+}
+
+.topshopcart .cart-item .cart-item-num {
+  float: left;
+  width: 30px;
+  color: #666;
+  text-align: center;
+}
+
+.topshopcart .cart-item .cart-item-del {
+  float: left;
+  width: 16px;
+  height: 16px;
+  margin-top: 28px;
+  background: url(../img/head-icons.png) no-repeat 0 -59px;
 }
 
 /* 导航 */

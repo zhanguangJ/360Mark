@@ -5,7 +5,7 @@
         var p = new Promise(function(succfn){
             $.ajax({
                 type : 'get',
-                url : 'src/api/index.php',
+                url : 'src/api/main.php',
                 async : true,
                 data : {
                     id : 55,
@@ -36,46 +36,46 @@
     search();
 
     //轮播图
-    //swiper基本款
-    var s1 = new Swiper('.swiper-container',{
-        simulateTouch : false,
-        autoplay : {//自动轮播
-            delay : 2000,//间隔时间
-        },
-        loop : true,//无缝 环路
-        navigation: {//上下按钮
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-        },
-        pagination: {//焦点跟随
-            el: '.swiper-pagination',
-            clickable: true,//点击焦点跳到指定图片
-            renderBullet: function(index, className) {
-                return '<span class="' + className + '"></span>';//生成焦点
+        //swiper基本款
+        var s1 = new Swiper('.swiper-container',{
+            simulateTouch : false,
+            autoplay : {//自动轮播
+                delay : 2000,//间隔时间
+            },
+            loop : true,//无缝 环路
+            navigation: {//上下按钮
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            },
+            pagination: {//焦点跟随
+                el: '.swiper-pagination',
+                clickable: true,//点击焦点跳到指定图片
+                renderBullet: function(index, className) {
+                    return '<span class="' + className + '"></span>';//生成焦点
+                }
+            },
+            effect : 'fade',
+            fade: {
+              crossFade: false,
             }
-        },
-        effect : 'fade',
-        fade: {
-          crossFade: false,
+        });
+
+        var oBox=document.getElementById('swiper-container');
+
+        oBox.onmouseover=function(){//鼠标经过停止
+            s1.autoplay.stop();
         }
-    });
 
-    var oBox=document.getElementById('swiper-container');
-
-    oBox.onmouseover=function(){//鼠标经过停止
-        s1.autoplay.stop();
-    }
-
-    oBox.onmouseout=function(){//鼠标离开就运动
-        s1.autoplay.start();
-    }   
+        oBox.onmouseout=function(){//鼠标离开就运动
+            s1.autoplay.start();
+        }   
 
     //登录注册
     loginResgin();
 
 
     window.onresize=window.onscroll=function(){
-    //浮动二维码
+        //浮动二维码
         var csFloor = document.getElementsByClassName("fixed-code")[0];
         var iScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         setTimeout(function() {
@@ -152,7 +152,7 @@
     //限时购商品数据渲染
     $.ajax({
         type : 'get',
-        url : 'src/api/index.php',
+        url : 'src/api/main.php',
         data : {
             id : 99,
             time : new Date()
@@ -241,7 +241,7 @@
     //渲染热门活动
     $.ajax({
         type : 'get',
-        url : 'src/api/index.php',
+        url : 'src/api/main.php',
         data : {
             id : 1,
             time : new Date()
@@ -272,7 +272,7 @@
     //路由器
     $.ajax({
         type : 'get',
-        url : 'src/api/index.php',
+        url : 'src/api/main.php',
         async : true,
         data : {
             id : 2,
@@ -299,7 +299,7 @@
     //儿童守护
     $.ajax({
         type : 'get',
-        url : 'src/api/index.php',
+        url : 'src/api/main.php',
         async : true,
         data : {
             id : 3,
@@ -326,7 +326,7 @@
     //家庭安防
      $.ajax({
         type : 'get',
-        url : 'src/api/index.php',
+        url : 'src/api/main.php',
         async : true,
         data : {
             id : 4,
@@ -353,7 +353,7 @@
     //行车安全
      $.ajax({
         type : 'get',
-        url : 'src/api/index.php',
+        url : 'src/api/main.php',
         async : true,
         data : {
             id : 2,
@@ -381,7 +381,7 @@
     //扫地机器人
     $.ajax({
         type : 'get',
-        url : 'src/api/index.php',
+        url : 'src/api/main.php',
         async : true,
         data : {
             id : 3,

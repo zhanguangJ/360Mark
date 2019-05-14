@@ -26,6 +26,15 @@ function toTop(){
     })
 }
 
+var isOk1 = false;
+var isOK2 = false;
+var isOk3 = false;
+var isOK4 = false;
+var isOk5 = false;
+
+var phone = '';
+var password = '';
+ 
 //随机验证码
 
 $(function(){
@@ -45,9 +54,8 @@ $(function(){
             $(".output2").html('请输入验证码！').css('color','red').css('fontSize','12px');
         }else if(val == num){
             $(".output2").html('验证码正确').css('color','#58bc58').css('fontSize','12px');
+            isOK2 = true;
             $(".input-val").val('');
-            draw(show_num);
-
         }else{
             $(".output2").html('验证码错误！请重新输入！').css('color','red').css('fontSize','12px');
             $("#input-val").val('');
@@ -115,6 +123,7 @@ function randomColor() {//得到随机的颜色值
 
 
 //登录注册 弹窗遮罩
+//购物车点击登录
 //点击登录 出现登录弹窗界面
 function loginResgin(){
     $("#login").click(function(){
@@ -122,6 +131,12 @@ function loginResgin(){
         $('.quc-panel-large').css('display','none');//注册界面
         $('.quc-mask').css('display','block');//遮罩
     }) 
+
+    $(".tip-login").click(function(){
+        $('.quc-login').css('display','block');//登录界面
+        $('.quc-panel-large').css('display','none');//注册界面
+        $('.quc-mask').css('display','block');//遮罩
+    })
 
     //点击快速注册
     $(".quc-left").click(function(){
@@ -177,7 +192,227 @@ function loginResgin(){
     })
 }
 
-//注册验证
+
+
+
+
+
+//注册表单验证
+//手机号验证
+$(".phoneRegister").children('div').eq(0).children('input').on('keyup',function(){
+    phone = $(this).val();
+    // console.log($(this).next().html('111').css("color","#58bc58"));
+    if (phone) {
+        if(/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(phone)){   
+            //发送ajax 验证手机号是否被注册
+            $.ajax({
+                type : 'get',
+                url : 'src/api/login.php',
+                data : {
+                    phone : phone,
+                    time : new Date()
+                },
+                success : function(str){
+                    var arr = JSON.parse(str);
+                    var res = arr.result1;
+                    if (res != 1) {
+                        $(".phoneRegister").children('div').eq(0).children('input').next().html('验证通过').css({
+                            color: '#58bc58',
+                            fontSize: '12px'
+                        });
+                        isOk1 = true;                         
+                    }else{
+                         $(".phoneRegister").children('div').eq(0).children('input').next().html('该手机号已经注册，请直接用手机号登录').css({
+                            color: 'red',
+                            fontSize: '12px'
+                        });                      
+                    }
+                }
+            })                  
+        }else{
+            $(this).next().html('手机号码格式不正确').css({
+                color: 'red',
+                fontSize: '12px'
+            });;
+            isOk1 = false;
+        }
+    }else{
+        $(this).next().html('请填写手机号码').css({
+            color: 'red',
+            fontSize: '12px'
+        });            
+    }
+})
+
+//短信验证码
+$(".phoneRegister").children('div').eq(2).children('input').on('blur',function(){
+    isOk3 = false;
+})
+//验证密码
+$(".phoneRegister").children('div').eq(3).children('input').on('blur',function(){
+    password = $(this).val();
+    if (password) {
+        if (password.length >= 8) {
+            if(/^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S+$/.test(password)){
+                $(this).next().html('');
+                isOk4 = true;                       
+            }else{                
+                $(this).next().html('至少包含数字/字母/字符两种组合，请重新输入').css({
+                    color: 'red',
+                    fontSize: '12px'
+                }); 
+            }
+        }else{
+            $(this).next().html('密码不能少于8位字符，请重新输入').css({
+                color: 'red',
+                fontSize: '12px'
+            });            
+        }
+    }else{
+        $(this).next().html('请填写密码').css({
+            color: 'red',
+            fontSize: '12px'
+        });
+    }
+})
+
+//判断是否勾选中了
+$(".phoneRegister").children('div').eq(4).find('input').on('blur',function(){
+    if ($(this).is(':checked')) {
+        isOk5 = true;
+    }else{
+        isOk5 = false;
+    }    
+})
+
+//点击注册按钮
+$(".phoneRegister").children('div').eq(5).children('input').on('click',function(){
+    if (isOk1 && isOK2 && isOk3 && isOk4 && isOk5) {
+        //发送ajax 插入数据库
+        $.ajax({
+            type : 'post',
+            url : 'src/api/register.php',
+            data : {
+                phone : phone,
+                password : password,
+                time : new Date()
+            },
+            success : function(str){
+                console.log(str);
+            }
+        })
+        // 未完成...................................................................
+        alert('成功注册,点击确定后跳转首页');
+        loginOf(phone);
+    }else{
+        alert('请填写完整的信息');
+    }
+})
+
+//登录验证
+//手机号
+$('.log-in').children('div').eq(2).children('input').click( function() {
+    var phoneLogin = $('.log-in').children('div').eq(0).children('input').val().trim();
+    var pswLogin = $('.log-in').children('div').eq(1).children('input').val().trim();
+    $.ajax({
+        type : 'post',
+        url : 'src/api/login.php',
+        data : {
+            phoneLogin : phoneLogin,
+            pswLogin : pswLogin,
+            time : new Date()
+        },
+        success : function(str){
+            var arr = JSON.parse(str);
+            console.log(arr);
+            var res2 = arr.result2;
+            if (res2 == 1) {
+                //登录成功 设置cookie
+                loginOf(phoneLogin);
+            }else{
+                alert("账号或密码错误");
+            }
+        }
+    })
+});
+
+
+function loginOf(name){
+    $('.loginbefore').css('display','none');
+    $('.loginafter').css('display','block');
+    $('.quc-login').css('display','none');
+    $('.quc-mask').css('display','none');
+    setCookie('username',name,1);
+    uName();
+}
+uName();
+
+function uName(){
+    //渲染用户名
+    var username = getCookie('username');
+    $html1 = `<span class="top-uname popUsername">
+                            ${username}
+                        </span>
+            <div class="popbox">
+                <a href="javascript:;" class="top-uname popUsername">${username}</a>
+                <ul class="topuserbox" >
+                    <li>
+                        <a href="javascript:;">我的订单</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">我的优惠券</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">我的喜欢</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">我的积分</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">收货地址</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">账号设置</a>
+                    </li>
+                    <li class="quit">
+                        <a href="javascript:;">退出登录</a>
+                    </li>
+                </ul>`;
+    $('.loginWrap').html($html1);
+
+}
+
+
+//看是否存在cookie
+function undateStatus(){
+    var username = getCookie('username');
+    if (username) {
+        $('.loginbefore').css('display','none');
+        $('.loginafter').css('display','block');
+        $('.cart-tips').css('display','none');
+        $('.cart-info').css('display','block');
+        $('.popUsername').html(username);
+    }else{
+        $('.loginbefore').css('display','block');
+        $('.loginafter').css('display','none');
+        $('.cart-tips').css('display','none');
+        $('.cart-info').css('display','block');   
+    }
+}
+undateStatus();
+
+//用户退出
+function quit(){
+    $(".quit").click(function(){
+        var username = getCookie('username');
+        removeCookie('username');
+        $('.loginbefore').css('display','block');
+        $('.loginafter').css('display','none'); 
+    })   
+}
+quit();
+
+
 
 
 //下拉搜索框
@@ -210,6 +445,9 @@ function find(){
                 if (index > lisize-1) {
                     index = 0;
                 };
+                $val = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
+                $(".text").attr('placeholder','');
+                $(".text").val($val);
                 $(".__mall_suggest__ li").eq(index).addClass('active');
             };
             //往上走
@@ -221,6 +459,9 @@ function find(){
                 if (index < 0) {
                     index = lisize-1;
                 };
+                $val = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
+                $(".text").attr('placeholder','');
+                $(".text").val($val);
                 $(".__mall_suggest__ li").eq(index).addClass('active');
             };
             if (ev.keyCode === 13) {
@@ -232,6 +473,40 @@ function find(){
 
     $(document).click(function(){
         $(".__mall_suggest__").css("display",'none');
+        $(".text").attr('placeholder','360儿童手表');
+        $(".text").val('');
     })
 
+
+    //点击搜索按钮发送表单内的内容到列表页
+    $(".search").click(function(){
+        var name = $(".text").attr('placeholder')+$(".text").val();
+        window.open('src/html/list.html?' + name.trim());
+
+    })
 }
+
+function setCookie(key, val, iday) {
+    //key:键名  val:键值  iday：失效时间
+    //document.cookie = 'name=malin;expires=date;path=/';
+    var now = new Date();
+    now.setDate(now.getDate() + iday); //iday==5:5天后失效，-1：立即失效
+    document.cookie = key + '=' + val + ';expires=' + now + ';path=/';
+}
+
+function getCookie(key) {
+    var str = document.cookie; //name=malin; psw=123456
+    var arr = str.split('; '); //[name=malin,psw=123456]
+    for(var ele of arr) {
+        var arr2 = ele.split('='); //[name,malin]
+        if(key == arr2[0]) {
+            return arr2[1];
+        }
+    }
+}
+
+function removeCookie(key) {
+    setCookie(key, '', -2);
+}
+
+
