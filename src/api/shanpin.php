@@ -1,6 +1,6 @@
 <?php
     include 'conn.php';
-    $id = isset($_GET['id']) ? $_GET['id'] : 1;
+    $id = isset($_GET['id']) ? $_GET['id'] : '';
 
     $sql = "SELECT * FROM shangpin where id=$id";
     //执行sql语句

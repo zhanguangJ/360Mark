@@ -1,5 +1,4 @@
 (function(){
-
     //下拉搜索数据渲染
     function search(){
         var p = new Promise(function(succfn){
@@ -35,44 +34,114 @@
     //下拉搜索菜单
     search();
 
-    //轮播图
-        //swiper基本款
-        var s1 = new Swiper('.swiper-container',{
-            simulateTouch : false,
-            autoplay : {//自动轮播
-                delay : 2000,//间隔时间
-            },
-            loop : true,//无缝 环路
-            navigation: {//上下按钮
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            },
-            pagination: {//焦点跟随
-                el: '.swiper-pagination',
-                clickable: true,//点击焦点跳到指定图片
-                renderBullet: function(index, className) {
-                    return '<span class="' + className + '"></span>';//生成焦点
-                }
-            },
-            effect : 'fade',
-            fade: {
-              crossFade: false,
-            }
+
+
+    //下拉搜索框
+    function find(){
+        //点击搜索框出项下拉菜单
+        $(".text").click(function(ev){
+            $(".__mall_suggest__").css("display",'block');
+            ev.stopPropagation();
+        })
+
+        //点击那个li就跳转到列表页
+        $(".__mall_suggest__").on('click', 'li', function() {
+            var name = $(this).attr('data-name')
+            window.open('src/html/list.html?' + name);
         });
 
-        var oBox=document.getElementById('swiper-container');
+        //键盘事件
+        //在文档加载后激活函数
+        var index = -1;
+        //li的长度
+        var lisize = $(".__mall_suggest__ li").size();
+        $(document).ready(function() {
+            $(".text").keydown(function(ev) {
+                //往下走
+                if (ev.keyCode === 40) {
+                    index ++;
+                    for(var i = 0; i < lisize; i++){
+                        $(".__mall_suggest__ li").eq(i).removeClass('active');
+                    }
+                    if (index > lisize-1) {
+                        index = 0;
+                    };
+                    $val = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
+                    $(".text").attr('placeholder','');
+                    $(".text").val($val);
+                    $(".__mall_suggest__ li").eq(index).addClass('active');
+                };
+                //往上走
+                if (ev.keyCode === 38) {
+                    index --;
+                    for(var i = 0; i < lisize; i++){
+                        $(".__mall_suggest__ li").eq(i).removeClass('active');
+                    }
+                    if (index < 0) {
+                        index = lisize-1;
+                    };
+                    $val = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
+                    $(".text").attr('placeholder','');
+                    $(".text").val($val);
+                    $(".__mall_suggest__ li").eq(index).addClass('active');
+                };
+                if (ev.keyCode === 13) {
+                    var name = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
+                    window.open('src/html/list.html?' + name);
+                };
+            });
+        });
 
-        oBox.onmouseover=function(){//鼠标经过停止
-            s1.autoplay.stop();
+        $(document).click(function(){
+            $(".__mall_suggest__").css("display",'none');
+            $(".text").attr('placeholder','360儿童手表');
+            $(".text").val('');
+        })
+
+
+        //点击搜索按钮发送表单内的内容到列表页
+        $(".search").click(function(){
+            var name = $(".text").attr('placeholder')+$(".text").val();
+            window.open('src/html/list.html?' + name.trim());
+
+        })
+    }
+
+
+    //轮播图
+    //swiper基本款
+    var s1 = new Swiper('.swiper-container',{
+        simulateTouch : false,
+        autoplay : {//自动轮播
+            delay : 2000,//间隔时间
+        },
+        loop : true,//无缝 环路
+        navigation: {//上下按钮
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+        pagination: {//焦点跟随
+            el: '.swiper-pagination',
+            clickable: true,//点击焦点跳到指定图片
+            renderBullet: function(index, className) {
+                return '<span class="' + className + '"></span>';//生成焦点
+            }
+        },
+        effect : 'fade',
+        fade: {
+          crossFade: false,
         }
+    });
 
-        oBox.onmouseout=function(){//鼠标离开就运动
-            s1.autoplay.start();
-        }   
+    var oBox=document.getElementById('swiper-container');
 
-    //登录注册
-    loginResgin();
+    oBox.onmouseover=function(){//鼠标经过停止
+        s1.autoplay.stop();
+    }
 
+    oBox.onmouseout=function(){//鼠标离开就运动
+        s1.autoplay.start();
+    }   
 
     window.onresize=window.onscroll=function(){
         //浮动二维码
@@ -191,21 +260,6 @@
     });
 
 
-    //点击导航旁边的字跳转到列表页
-    $('.navbar').on('click', 'li', function() {
-        if ($(this).attr('data-name')) {
-            var name = $(this).attr('data-name')
-            window.open('src/html/list.html?' + name);        
-        };
-    });
-
-    //点击中文跳转就对了
-    $('.searchKey').on('click','a',function(){
-        // console.log($(this).attr('data-id'));
-        var id = $(this).attr('data-id')
-        window.open('src/html/details.html?' + id);
-    })   
-
     //点击轮播图跳转
     $('#lunbotu').on('click','img',function(){
         // console.log($(this).attr('data-id'));
@@ -220,7 +274,7 @@
         window.open('src/html/details.html?' + id);
     })
 
-    //点击人们商品的广告跳转到列表页
+    //点击热门商品的广告跳转到列表页
     $('.mod-hodGoods').on('click','.prod-tit',function(){
         // console.log($(this).attr('data-name'));
         var name = $(this).attr('data-name')

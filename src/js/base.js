@@ -24,6 +24,21 @@ function toTop(){
             }
         },30);            
     })
+
+    $('#pageBtnWrap').click(function(){
+        //点击缓慢回到顶部
+        var scrollTop=window.setInterval(function(){
+            //pageYOffset获取窗口离上面的距离
+            var pop=window.pageYOffset;
+            if(pop>0){
+                window.scrollTo(0,pop-3);
+            }
+            else{
+                window.clearInterval(scrollTop);
+            }
+        },30);
+    })
+
 }
 
 var isOk1 = false;
@@ -63,9 +78,6 @@ $(function(){
         }
     })
 })
-
-
-
 
 function draw(show_num) {
     var canvas_width=$('#canvas').width();
@@ -122,6 +134,12 @@ function randomColor() {//得到随机的颜色值
 }
 
 
+
+//登录注册
+loginResgin();
+
+
+
 //登录注册 弹窗遮罩
 //购物车点击登录
 //点击登录 出现登录弹窗界面
@@ -147,6 +165,24 @@ function loginResgin(){
         }, 50)
     })
 
+    //点击详情页加入购物车
+    $(".gInfoBtn-addcart").click(function(){
+        $('.quc-login').css('display','block');//登录界面
+        $('.quc-panel-large').css('display','none');//注册界面
+        $('.quc-mask').css('display','block');//遮罩
+    })  
+    //点击详情页喜欢
+    $(".favorite").click(function(){
+        $('.quc-login').css('display','block');//登录界面
+        $('.quc-panel-large').css('display','none');//注册界面
+        $('.quc-mask').css('display','block');//遮罩     
+    }) 
+    //列表页点击加入购物车
+    $('.list-item').on('click', '.add-cart', function(event) {
+        $('.quc-login').css('display','block');//登录界面
+        $('.quc-panel-large').css('display','none');//注册界面
+        $('.quc-mask').css('display','block');//遮罩
+    });     
 
     //点击关闭按钮
     $('.quc-icon-close').click(function(){
@@ -159,7 +195,7 @@ function loginResgin(){
         $('.quc-login').css('display','none');//登录界面
         $('.quc-mask').css('display','block');//遮罩    
         $('.quc-panel-large').css('display','block');//注册界面   
-        $('.quc-input-append').css('display','block');         
+        $('.quc-input-append').css('display','block');      
     })
 
     //点击直接登录
@@ -168,7 +204,8 @@ function loginResgin(){
             $('.quc-login').css('display','block');//登录界面
         }, 50)
         $('.quc-panel-large').css('display','none');//注册界面
-        $('.quc-mask').css('display','block');//遮罩        
+        $('.quc-mask').css('display','block');//遮罩   
+        location.reload(true);     
     })
 
 
@@ -191,8 +228,6 @@ function loginResgin(){
         }
     })
 }
-
-
 
 
 
@@ -244,10 +279,51 @@ $(".phoneRegister").children('div').eq(0).children('input').on('keyup',function(
     }
 })
 
-//短信验证码
-$(".phoneRegister").children('div').eq(2).children('input').on('blur',function(){
-    isOk3 = false;
+
+
+//点击获取验证码
+var validCode=true;
+$(".quc-input-append").click(function(){
+    var tel =  $(this).parent().prev().prev().children('input').val();
+    var Code = $(this).prev().prev().val();
+    if(tel != ""){
+        isOk3 = true;
+        var time=10;
+        var code=$(this);
+        if (validCode) {
+            validCode=false;
+            code.addClass("msgs1");
+            code.css('color','#818080');
+            //发送ajax请求
+            $.ajax({
+                type : 'post',
+                url : '/360Mark/src/api/duanxin.php',
+                data :{
+                    userphone : tel
+                },
+                success : function(str){
+                    if (str) {
+                        isOk3 = true;
+                    };
+                }
+            })
+            var t=setInterval(function() {
+                time--;
+                code.html(time+"秒");
+                if (time==0) {
+                    clearInterval(t);
+                    code.html("重新获取");
+                    code.css('color','#58bc58');
+                    validCode=true;
+                    code.removeClass("msgs1");
+                }
+            },1000)
+        }
+    }else{
+        alert("请先输入手机号码");
+    }
 })
+
 //验证密码
 $(".phoneRegister").children('div').eq(3).children('input').on('blur',function(){
     password = $(this).val();
@@ -301,13 +377,16 @@ $(".phoneRegister").children('div').eq(5).children('input').on('click',function(
                 console.log(str);
             }
         })
-        // 未完成...................................................................
         alert('成功注册,点击确定后跳转首页');
+        $('.quc-panel-large').css('display','none');
         loginOf(phone);
     }else{
         alert('请填写完整的信息');
     }
 })
+
+
+
 
 //登录验证
 //手机号
@@ -316,7 +395,7 @@ $('.log-in').children('div').eq(2).children('input').click( function() {
     var pswLogin = $('.log-in').children('div').eq(1).children('input').val().trim();
     $.ajax({
         type : 'post',
-        url : 'src/api/login.php',
+        url : '/360Mark/src/api/login.php',
         data : {
             phoneLogin : phoneLogin,
             pswLogin : pswLogin,
@@ -324,11 +403,11 @@ $('.log-in').children('div').eq(2).children('input').click( function() {
         },
         success : function(str){
             var arr = JSON.parse(str);
-            console.log(arr);
             var res2 = arr.result2;
             if (res2 == 1) {
                 //登录成功 设置cookie
                 loginOf(phoneLogin);
+                location.reload(true);
             }else{
                 alert("账号或密码错误");
             }
@@ -336,19 +415,21 @@ $('.log-in').children('div').eq(2).children('input').click( function() {
     })
 });
 
-
+//设置cookie
 function loginOf(name){
     $('.loginbefore').css('display','none');
     $('.loginafter').css('display','block');
     $('.quc-login').css('display','none');
     $('.quc-mask').css('display','none');
+    $('.cart-tips').css('display','none');
+    $('.cart-info').css('display','block');
     setCookie('username',name,1);
     uName();
 }
 uName();
 
+//渲染用户名
 function uName(){
-    //渲染用户名
     var username = getCookie('username');
     $html1 = `<span class="top-uname popUsername">
                             ${username}
@@ -377,114 +458,214 @@ function uName(){
                     <li class="quit">
                         <a href="javascript:;">退出登录</a>
                     </li>
-                </ul>`;
+                </ul>
+            </div>`;
     $('.loginWrap').html($html1);
 
 }
 
+//渲染小购物车
+function ssCart(){
+    var username = getCookie('username');
+    var p = new Promise(function(succfn){
+        $.ajax({
+            type : 'get',
+            url : '/360Mark/src/api/order.php',
+            data : {
+                username : username,
+                time : new Date()
+            },
+            success : function(str){
+                succfn(str);
+
+            }
+        })        
+    })
+    
+    p.then(function(str){
+        var str1 = str.replace(/\}(.+?)\{/g,"},{");
+        if (!str1) {
+            str1 = '{'+str1+'}';
+        }
+        var arr = JSON.parse(str1);
+        //渲染购物车
+        if (arr.length) {
+            $html = arr.map(function(item) {
+                 return `<li class="cart-item" data-id="${item.id}">
+                            <a href="javascript:;">
+                                <img src="/360Mark/src/img/${item.title}${item.bigimg}.jpg">
+                                    <span class="cart-item-text">
+                                        <strong>${item.name}</strong>
+                                    </span>
+                            </a>
+                            <span class="cart-item-price">
+                                <span class="yen">¥</span>
+                                ${item.price}.00
+                            </span>
+                            <span class="cart-item-num">&nbsp;</span>
+                            <a class="cart-item-del" href="javascript:;"></a>
+                        </li>`;
+            }).join('');
+        }else{
+            $html = `快去购买商品吧`;
+        }
+        $(".cart-list").html($html);
+    }).then(function(){
+        $.ajax({
+            type : 'get',
+            url : '/360Mark/src/api/shopcart.php',
+            data : {
+                data : 1,
+                username : username,
+                time : new Date()
+            },
+            //渲染价格
+            success : function(str){
+                var arr = JSON.parse(str);
+                var num = arr[0]["sum(num)"];
+                $.ajax({
+                    type : 'get',
+                    url : '/360Mark/src/api/shopcart.php',
+                    data : {
+                        data : 2,
+                        username : username,
+                        time : new Date()
+                    },
+                    success : function(str){
+                        if ($('.cart-list').children('li').size()==0) {
+                            $html = ` <span>
+                                    共<b>0</b>
+                                    件商品 总计：
+                                    <b>
+                                        <span class="yen">￥</span>
+                                        0
+                                    </b>
+                                </span>
+                                <a href="/360Mark/src/html/cart.html" class="cart-buy">去购物车</a>`;
+                        }else{
+                            var arr = JSON.parse(str);
+                            var total = arr[0]["sum(totalprice)"];
+                            $html = ` <span>
+                                    共<b>${num}</b>
+                                    件商品 总计：
+                                    <b>
+                                        <span class="yen">￥</span>
+                                        ${total}
+                                    </b>
+                                </span>
+                                <a href="/360Mark/src/html/cart.html" class="cart-buy">去购物车</a>`;
+                        }
+                        $(".cart-count").html($html);
+                    }
+                })
+            }
+        })
+    })
+}
 
 //看是否存在cookie
 function undateStatus(){
     var username = getCookie('username');
     if (username) {
+        ssCart();
+        $('.quc-panel-large').css('display','none');
         $('.loginbefore').css('display','none');
         $('.loginafter').css('display','block');
         $('.cart-tips').css('display','none');
         $('.cart-info').css('display','block');
+        //我的订单
+        $('.topNavMyOrder').css('display','block');
         $('.popUsername').html(username);
+        //详情页点击加入购物车 未完成......................................................
+        $(".gInfoBtn-addcart").click(function(){
+            //确定哪个用户
+            var username = getCookie('username');
+            //通过url获取商品ID
+            var url = decodeURI(location.search);
+            var obj =   url.split('?')[1];
+            console.log(obj);
+            
+            //数组发送ajax请求 ,把数组插入数据库 
+            $.ajax({
+                type : 'get',
+                url : '/360Mark/src/api/cart.php',
+                data : {
+                    username : username,
+                    goodsId : obj,
+                    time : new Date()
+                },
+                success : function(str){
+                    //如果成功返回1 发送ajax请求 查询购物车订单表
+                    if (str == 1) {
+                        //渲染小购物车
+                        ssCart();
+                    };
+                }
+
+            })
+        })
+        //点击喜欢 未完成...................................................................
+        $(".favorite").click(function(){
+            console.log(222);
+        })
+
+        //点击列表页加入购物车渲染小购物车
+        $('.list-item').on('click', '.add-cart', function() {
+            //确定哪个用户
+            var username = getCookie('username');
+            //商品ID
+            var goodsId = $(this).parent().attr("data-id");
+            
+            //数组发送ajax请求 ,把数组插入数据库 
+            $.ajax({
+                type : 'get',
+                url : '/360Mark/src/api/cart.php',
+                data : {
+                    username : username,
+                    goodsId : goodsId,
+                    time : new Date()
+                },
+                success : function(str){
+                    //如果成功返回1 发送ajax请求 查询购物车订单表
+                    if (str == 1) {
+                        //渲染小购物车
+                        ssCart();
+                    };
+                }
+
+            })
+
+        });
+
+
     }else{
         $('.loginbefore').css('display','block');
         $('.loginafter').css('display','none');
-        $('.cart-tips').css('display','none');
-        $('.cart-info').css('display','block');   
+        $('.cart-tips').css('display','block');
+        $('.cart-info').css('display','none');  
+        //我的订单
+        $('.topNavMyOrder').css('display','none');
+        //详情页点击加入购物车 
+        loginResgin();       
     }
 }
 undateStatus();
 
-//用户退出
+//用户退出 回到首页
 function quit(){
     $(".quit").click(function(){
         var username = getCookie('username');
         removeCookie('username');
         $('.loginbefore').css('display','block');
         $('.loginafter').css('display','none'); 
-    })   
+        $('.cart-tips').css('display','block');
+        $('.cart-info').css('display','none');
+        window.location.href="/360Mark/main.html";
+    }) 
 }
 quit();
 
 
-
-
-//下拉搜索框
-function find(){
-    //点击搜索框出项下拉菜单
-    $(".text").click(function(ev){
-        $(".__mall_suggest__").css("display",'block');
-        ev.stopPropagation();
-    })
-
-    //点击那个li就跳转到列表页
-    $(".__mall_suggest__").on('click', 'li', function() {
-        var name = $(this).attr('data-name')
-        window.open('src/html/list.html?' + name);
-    });
-
-    //键盘事件
-    //在文档加载后激活函数
-    var index = -1;
-    //li的长度
-    var lisize = $(".__mall_suggest__ li").size();
-    $(document).ready(function() {
-        $(".text").keydown(function(ev) {
-            //往下走
-            if (ev.keyCode === 40) {
-                index ++;
-                for(var i = 0; i < lisize; i++){
-                    $(".__mall_suggest__ li").eq(i).removeClass('active');
-                }
-                if (index > lisize-1) {
-                    index = 0;
-                };
-                $val = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
-                $(".text").attr('placeholder','');
-                $(".text").val($val);
-                $(".__mall_suggest__ li").eq(index).addClass('active');
-            };
-            //往上走
-            if (ev.keyCode === 38) {
-                index --;
-                for(var i = 0; i < lisize; i++){
-                    $(".__mall_suggest__ li").eq(i).removeClass('active');
-                }
-                if (index < 0) {
-                    index = lisize-1;
-                };
-                $val = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
-                $(".text").attr('placeholder','');
-                $(".text").val($val);
-                $(".__mall_suggest__ li").eq(index).addClass('active');
-            };
-            if (ev.keyCode === 13) {
-                var name = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
-                window.open('src/html/list.html?' + name);
-            };
-        });
-    });
-
-    $(document).click(function(){
-        $(".__mall_suggest__").css("display",'none');
-        $(".text").attr('placeholder','360儿童手表');
-        $(".text").val('');
-    })
-
-
-    //点击搜索按钮发送表单内的内容到列表页
-    $(".search").click(function(){
-        var name = $(".text").attr('placeholder')+$(".text").val();
-        window.open('src/html/list.html?' + name.trim());
-
-    })
-}
 
 function setCookie(key, val, iday) {
     //key:键名  val:键值  iday：失效时间
@@ -508,5 +689,49 @@ function getCookie(key) {
 function removeCookie(key) {
     setCookie(key, '', -2);
 }
+
+//点击X按钮删除一个订单 要获取用户ID 根据父节点获取商品ID
+$(".cart-list").on('click','.cart-item-del',function(){
+    var username = getCookie('username');
+    var gid = $(this).parent('li').attr("data-id");
+    $.ajax({
+        type : 'get',
+        url : '/360Mark/src/api/delete.php',
+        data : {
+            username : username,
+            gid : gid,
+            time : new Date()
+        },
+        success : function(str){
+            if (str ==1) {
+                ssCart();
+            }else{
+                alert('删除失败');
+            }
+        }
+    })
+})
+
+
+//点击导航旁边的字跳转到列表页
+$('.topfrist').on('click', function() {
+        window.open('/360Mark/src/html/list.html');        
+});
+
+
+//点击导航旁边的字跳转到列表页
+$('.navbar').on('click', 'li', function() {
+    if ($(this).attr('data-name')) {
+        var name = $(this).attr('data-name')
+        window.open('/360Mark/src/html/list.html?' + name);        
+    };
+});
+
+//点击中文跳转就对了
+$('.searchKey').on('click','a',function(){
+    // console.log($(this).attr('data-id'));
+    var id = $(this).attr('data-id')
+    window.open('/360Mark/src/html/details.html?' + id);
+})   
 
 

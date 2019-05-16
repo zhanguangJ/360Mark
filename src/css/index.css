@@ -36,12 +36,13 @@ body {
 }
 
 .loginbefore {
-  margin: 0 10px;
+  margin: 0 30px;
 }
 .loginbefore a {
   color: #999999;
   font-size: 12px;
   line-height: 45px;
+  margin-left: 15px;
 }
 .loginbefore a:hover {
   color: #23ac38;
@@ -388,6 +389,7 @@ body {
 .quc-input-has-prefix .quc-input-append {
   top: 1px;
   right: -29px;
+  cursor: pointer;
 }
 
 #canvas {
@@ -600,6 +602,36 @@ body {
   height: 16px;
   margin-top: 28px;
   background: url(../img/head-icons.png) no-repeat 0 -59px;
+}
+
+.topshopcart .cart-count {
+  padding: 10px 15px 10px 20px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  background: #f6f6f6;
+  color: #31373c;
+}
+.topshopcart .cart-count b {
+  color: #e94c30;
+}
+
+.topshopcart .cart-buy {
+  float: right;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  background: #30ab38;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.msgs1 {
+  background: #E6E6E6;
+  color: #818080;
+  border: 1px solid #CCCCCC;
 }
 
 /* 导航 */
