@@ -55,7 +55,7 @@
         //点击那个li就跳转到列表页
         $(".__mall_suggest__").on('click', 'li', function() {
             var name = $(this).attr('data-name')
-            window.open('/360Mark/src/html/list.html?' + name);
+            window.open('list.html?' + name);
         });
 
         //键盘事件
@@ -95,7 +95,7 @@
                 };
                 if (ev.keyCode === 13) {
                     var name = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
-                    window.open('/360Mark/src/html/list.html?' + name);
+                    window.open('list.html?' + name);
                 };
             });
         });
@@ -110,7 +110,7 @@
         //点击搜索按钮发送表单内的内容到列表页
         $(".search").click(function(){
             var name = $(".text").attr('placeholder')+$(".text").val();
-            window.open('/360Mark/src/html/list.html?' + name.trim());
+            window.open('list.html?' + name.trim());
 
         })
     }
@@ -270,5 +270,60 @@
         $(this).val(num);
     })    
 
+
+       //点击商品图片跳转到详情页
+    $('.list').on('click','img',function(){
+        // console.log($(this).attr('data-id'));
+        var id = $(this).attr('data-id')
+        window.open('../html/details.html?' + id);
+    })
+
+    //点击商品名字跳转到详情页
+     $('.list').on('click','span',function(){
+        // console.log($(this).attr('data-id'));
+        var id = $(this).attr('data-id')
+        window.open('../html/details.html?' + id);
+    })   
+
+     //点击导航旁边的字跳转到列表页
+    $('.topfrist').on('click', function() {
+            window.open('list.html');        
+    });
+
+
+    //点击导航旁边的字跳转到列表页
+    $('.navbar').on('click', 'li', function() {
+        if ($(this).attr('data-name')) {
+            var name = $(this).attr('data-name')
+            window.open('list.html?' + name);        
+        };
+    });
+
+    //点击中文跳转就对了
+    $('.searchKey').on('click','a',function(){
+        // console.log($(this).attr('data-id'));
+        var id = $(this).attr('data-id')
+        window.open('details.html?' + id);
+    })   
+
+    //点击logo回到首页
+    $("h1").click(function(){
+        window.open('index.html');
+    })
+
+    
+    //用户退出 回到首页
+    function quit(){
+        $(".quit").click(function(){
+            var username = getCookie('username');
+            removeCookie('username');
+            $('.loginbefore').css('display','block');
+            $('.loginafter').css('display','none'); 
+            $('.cart-tips').css('display','block');
+            $('.cart-info').css('display','none');
+            window.location.href="../../index.html";
+        }) 
+    }
+    quit();
     
 })()

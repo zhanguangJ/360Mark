@@ -579,7 +579,7 @@ function ssCart(){
                                         0
                                     </b>
                                 </span>
-                                <a href="/360Mark/src/html/cart.html" class="cart-buy">去购物车</a>`;
+                                <a href="javascript:;" class="cart-buy">去购物车</a>`;
                         }else{
                             var arr = JSON.parse(str);
                             var total = arr[0]["sum(totalprice)"];
@@ -591,15 +591,19 @@ function ssCart(){
                                         ${total}
                                     </b>
                                 </span>
-                                <a href="/360Mark/src/html/cart.html" class="cart-buy">去购物车</a>`;
+                                <a href="javascript:;" class="cart-buy">去购物车</a>`;
                         }
                         $(".cart-count").html($html);
+                        $(".cart-buy").click(function(){
+                            window.location.href= '/360Mark/src/html/cart.html';
+                        })
                     }
                 })
             }
         })
     })
 }
+
 
 undateStatus();
 
@@ -714,19 +718,7 @@ function undateStatus(){
 }
 
 
-//用户退出 回到首页
-function quit(){
-    $(".quit").click(function(){
-        var username = getCookie('username');
-        removeCookie('username');
-        $('.loginbefore').css('display','block');
-        $('.loginafter').css('display','none'); 
-        $('.cart-tips').css('display','block');
-        $('.cart-info').css('display','none');
-        window.location.href="/360Mark/index.html";
-    }) 
-}
-quit();
+
 
 
 
@@ -776,29 +768,5 @@ $(".cart-list").on('click','.cart-item-del',function(){
 })
 
 
-//点击导航旁边的字跳转到列表页
-$('.topfrist').on('click', function() {
-        window.open('/360Mark/src/html/list.html');        
-});
 
-
-//点击导航旁边的字跳转到列表页
-$('.navbar').on('click', 'li', function() {
-    if ($(this).attr('data-name')) {
-        var name = $(this).attr('data-name')
-        window.open('/360Mark/src/html/list.html?' + name);        
-    };
-});
-
-//点击中文跳转就对了
-$('.searchKey').on('click','a',function(){
-    // console.log($(this).attr('data-id'));
-    var id = $(this).attr('data-id')
-    window.open('/360Mark/src/html/details.html?' + id);
-})   
-
-//点击logo回到首页
-$("h1").click(function(){
-    window.open('/360Mark/index.html');
-})
 

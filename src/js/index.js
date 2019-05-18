@@ -1,4 +1,32 @@
 (function(){
+
+
+    //点击导航旁边的字跳转到列表页
+    $('.topfrist').on('click', function() {
+            window.open('src/html/list.html');        
+    });
+
+
+    //点击导航旁边的字跳转到列表页
+    $('.navbar').on('click', 'li', function() {
+        if ($(this).attr('data-name')) {
+            var name = $(this).attr('data-name')
+            window.open('src/html/list.html?' + name);        
+        };
+    });
+
+    //点击中文跳转就对了
+    $('.searchKey').on('click','a',function(){
+        // console.log($(this).attr('data-id'));
+        var id = $(this).attr('data-id')
+        window.open('src/html/details.html?' + id);
+    })   
+
+    //点击logo回到首页
+    $("h1").click(function(){
+        window.open('src/html/index.html');
+    })
+
     //下拉搜索数据渲染
     function search(){
         var p = new Promise(function(succfn){
@@ -457,6 +485,21 @@
             $(".rab").html($html);
         }
     }) 
+
+    //用户退出 回到首页
+    function quit(){
+        $(".quit").click(function(){
+            var username = getCookie('username');
+            removeCookie('username');
+            $('.loginbefore').css('display','block');
+            $('.loginafter').css('display','none'); 
+            $('.cart-tips').css('display','block');
+            $('.cart-info').css('display','none');
+            window.location.href="index.html";
+        }) 
+    }
+    quit();
+
 
 
 
