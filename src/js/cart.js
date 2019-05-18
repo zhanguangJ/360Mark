@@ -55,7 +55,7 @@
         //点击那个li就跳转到列表页
         $(".__mall_suggest__").on('click', 'li', function() {
             var name = $(this).attr('data-name')
-            window.open('src/html/list.html?' + name);
+            window.open('/360Mark/src/html/list.html?' + name);
         });
 
         //键盘事件
@@ -95,7 +95,7 @@
                 };
                 if (ev.keyCode === 13) {
                     var name = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
-                    window.open('src/html/list.html?' + name);
+                    window.open('/360Mark/src/html/list.html?' + name);
                 };
             });
         });
@@ -187,8 +187,7 @@
                                         <a href="javascript:;" class='addnum'>+</a>
                                     </div>
                                 </td>
-                                <td class="total-price col6 ng-binding">￥${arr[i]['totalprice']}.00</td>
-`
+                                <td class="total-price col6 ng-binding">￥${arr[i]['totalprice']}.00</td>`
 
                         $(".goods").eq(i).append($ht);
                     }
@@ -235,7 +234,9 @@
     })
 
     $('.cartbody').on('click','.cutnum',function(){
+        var username = getCookie('username');
         var num = $(this).next().val();
+        var gId = $(this).parent().parent().parent().attr("data-id");
         num--;
         console.log(num);
         if (num <= 1) {
@@ -244,11 +245,32 @@
         $(this).next().val(num);
         xiaoji($(this));
         all();
+
+        var xJ = $(this).parent().parent().next().html();
+        var totalprice = xJ.slice(2,);
+
+        $.ajax({
+            type : 'get',
+            url : '/360Mark/src/api/updatecart.php',
+            data : {
+                num : num,
+                username : username,
+                gId : gId,
+                totalprice : totalprice,
+                time : new Date()
+            },
+            success : function(str){
+                console.log(str);
+            }
+        })
     })
 
     //手动改变数量
     $('.cartbody').on('keyup','.ng-pristine',function(){
+        var username = getCookie('username');
         var num = $(this).val();
+        var gId = $(this).parent().parent().parent().attr("data-id");
+
         if (num > 10) {
             num = 10;
         }else if(num <=1){
@@ -257,6 +279,25 @@
         $(this).val(num);
         xiaoji($(this));
         all();
+
+        var xJ = $(this).parent().parent().next().html();
+        var totalprice = xJ.slice(2,);
+
+        $.ajax({
+            type : 'get',
+            url : '/360Mark/src/api/updatecart.php',
+            data : {
+                num : num,
+                username : username,
+                gId : gId,
+                totalprice : totalprice,
+                time : new Date()
+            },
+            success : function(str){
+                console.log(str);
+            }
+        })
+
     })
 
     //点击删除
@@ -288,12 +329,22 @@
         all();
     })
 
+    //优惠券
+    $('.icon-toggle').click(function(){
+        $(".ng-hide").toggleClass("area");
+    })
+        
     //全选
     $('.statistics input').on('click',function(){
         //所有checked被选中
         var isok = $('.statistics input').prop('checked');
         $('.col1 input').prop('checked',isok);
         all();
+    })
+
+    //继续购物
+    $('.backtoshopping').click(function(){
+        window.location.href='/360Mark/index.html';
     })
 
     //全部选中，全选给选中

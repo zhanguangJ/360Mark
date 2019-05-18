@@ -4,6 +4,8 @@
     $username = isset($_GET["username"]) ? $_GET["username"] : '';
     // 商品ID
     $goodsId = isset($_GET["goodsId"]) ? $_GET["goodsId"] : '';
+    //商品数量，如果没传过来，默认为1
+    $num2 = isset($_GET["num1"]) ? $_GET["num1"] : '1';
 
     // //sql语句
     $sql1 = "SELECT * FROM userinfo where username='$username'";
@@ -28,7 +30,7 @@
 
     $gnum = $res4->num_rows;
 
-    //如果存在跟新数据
+    // //如果存在跟新数据
     if($gnum > 0 ){
         $num = $content4[0]['num'];
         $gprice = $content5[0]['price'];
@@ -38,10 +40,10 @@
     }else{   
         $gprice = $content2[0]['price'];
         // 反之往购物车插入数据
-        $sql3 = "INSERT INTO showcart (shangpinId,userId,num,totalprice) VALUES ($goodsId,$uId,1,$gprice)";
+        $sql3 = "INSERT INTO showcart (shangpinId,userId,num,totalprice) VALUES ($goodsId,$uId,$num2,$gprice)";
     }
-
     $res3 = $conn->query($sql3);
+
 
     if ($res3) {
         echo 1;
@@ -49,8 +51,5 @@
         echo 0;
     }
 
-    // $content2 = $res2->fetch_all(MYSQLI_ASSOC);
-
-    // echo json_encode($content2,JSON_UNESCAPED_UNICODE);
 
 ?>

@@ -200,12 +200,12 @@ function loginResgin(){
 
     //点击直接登录
     $(".Direct-login").click(function(){
+        console.log(111);
         setTimeout(function(){
             $('.quc-login').css('display','block');//登录界面
         }, 50)
         $('.quc-panel-large').css('display','none');//注册界面
-        $('.quc-mask').css('display','block');//遮罩   
-        location.reload(true);     
+        $('.quc-mask').css('display','block');//遮罩     
     })
 
 
@@ -217,13 +217,13 @@ function loginResgin(){
         var content = $(this).children().html();
         if (content) {
             //短信验证
-            $('.quc-mobile>input').attr('type','mobile').attr('placeholder','手机号').attr('maxlength','11');
+            $('.quc-mobile>input').attr('type','mobile').attr('placeholder','验证码次数不够所以没做请切换到账号登录').attr('maxlength','11');
             $('.quc-psw>input').attr('type','smscode').attr('placeholder','短信验证码');
             $('.quc-input-append').css('display','block');
         }else{
             //360账号登录
-            $('.quc-mobile>input').attr('type','userName').attr('placeholder','手机号/用户名/邮箱');
-            $('.quc-psw>input').attr('type','password').attr('placeholder','密码');
+            $('.quc-mobile>input').attr('type','userName').attr('placeholder','手机号/用户名/邮箱/试用账号123456');
+            $('.quc-psw>input').attr('type','password').attr('placeholder','密码/密码123456');
             $('.quc-input-append').css('display','none');
         }
     })
@@ -255,7 +255,7 @@ $(".phoneRegister").children('div').eq(0).children('input').on('keyup',function(
                             color: '#58bc58',
                             fontSize: '12px'
                         });
-                        isOk1 = true;                         
+                        isOk1 = true;
                     }else{
                          $(".phoneRegister").children('div').eq(0).children('input').next().html('该手机号已经注册，请直接用手机号登录').css({
                             color: 'red',
@@ -295,6 +295,8 @@ $(".quc-input-append").click(function(){
             code.addClass("msgs1");
             code.css('color','#818080');
             //发送ajax请求
+            //输入的验证码
+
             $.ajax({
                 type : 'post',
                 url : '/360Mark/src/api/duanxin.php',
@@ -302,9 +304,23 @@ $(".quc-input-append").click(function(){
                     userphone : tel
                 },
                 success : function(str){
-                    if (str) {
-                        isOk3 = true;
-                    };
+                    var arr = JSON.parse(str);
+                    $('#SMS').on('blur',function() {
+                        var yzm = $('#SMS').val();
+                        // console.log(yzm);       
+                        if (arr.phonecode == yzm) {
+                            isOk3 = true;
+                            $(".phoneRegister").children('div').eq(2).children('div').eq(1).next().html('验证通过').css({
+                                color: '#58bc58',
+                                fontSize: '12px'
+                            });
+                        }else{
+                            $(".phoneRegister").children('div').eq(2).children('div').eq(1).next().html('验证码错误！请重新输入！').css({
+                                    color: 'red',
+                                    fontSize: '12px'
+                                });
+                        }    
+                    });
                 }
             })
             var t=setInterval(function() {
@@ -379,7 +395,9 @@ $(".phoneRegister").children('div').eq(5).children('input').on('click',function(
         })
         alert('成功注册,点击确定后跳转首页');
         $('.quc-panel-large').css('display','none');
+        $('.topNavMyOrder').css('display','block');
         loginOf(phone);
+        ssCart();
     }else{
         alert('请填写完整的信息');
     }
@@ -464,6 +482,7 @@ function uName(){
 
 }
 
+
 //渲染小购物车
 function ssCart(){
     var username = getCookie('username');
@@ -476,6 +495,7 @@ function ssCart(){
                 time : new Date()
             },
             success : function(str){
+
                 succfn(str);
 
             }
@@ -502,14 +522,32 @@ function ssCart(){
                                 <span class="yen">¥</span>
                                 ${item.price}.00
                             </span>
-                            <span class="cart-item-num">&nbsp;</span>
-                            <a class="cart-item-del" href="javascript:;"></a>
+                            
                         </li>`;
             }).join('');
         }else{
             $html = `快去购买商品吧`;
         }
         $(".cart-list").html($html);
+
+        $.ajax({
+            type : 'get',
+            url : '/360Mark/src/api/showcart.php',
+            data : {
+                username : username,
+                time : new Date()
+            },
+            success : function(str){
+                let arr = JSON.parse(str);
+                for(let i = 0; i < arr.length;i++){
+                    $ht = `<span class="cart-item-num"> ×${arr[i]['num']}</span>
+                            <a class="cart-item-del" href="javascript:;"></a>`
+                    $(".cart-item").eq(i).append($ht);
+                }
+            }
+        })
+
+
     }).then(function(){
         $.ajax({
             type : 'get',
@@ -522,7 +560,7 @@ function ssCart(){
             //渲染价格
             success : function(str){
                 var arr = JSON.parse(str);
-                var num = arr[0]["sum(num)"];
+                var goodsnum = arr[0]["sum(num)"];
                 $.ajax({
                     type : 'get',
                     url : '/360Mark/src/api/shopcart.php',
@@ -534,7 +572,7 @@ function ssCart(){
                     success : function(str){
                         if ($('.cart-list').children('li').size()==0) {
                             $html = ` <span>
-                                    共<b>0</b>
+                                    共<b class="cartNum">0</b>
                                     件商品 总计：
                                     <b>
                                         <span class="yen">￥</span>
@@ -546,7 +584,7 @@ function ssCart(){
                             var arr = JSON.parse(str);
                             var total = arr[0]["sum(totalprice)"];
                             $html = ` <span>
-                                    共<b>${num}</b>
+                                    共<b class="cartNum">${goodsnum}</b>
                                     件商品 总计：
                                     <b>
                                         <span class="yen">￥</span>
@@ -563,6 +601,8 @@ function ssCart(){
     })
 }
 
+undateStatus();
+
 //看是否存在cookie
 function undateStatus(){
     var username = getCookie('username');
@@ -576,14 +616,17 @@ function undateStatus(){
         //我的订单
         $('.topNavMyOrder').css('display','block');
         $('.popUsername').html(username);
-        //详情页点击加入购物车 未完成......................................................
+
+        //详情页点击加入购物车 
         $(".gInfoBtn-addcart").click(function(){
             //确定哪个用户
             var username = getCookie('username');
             //通过url获取商品ID
             var url = decodeURI(location.search);
             var obj =   url.split('?')[1];
-            console.log(obj);
+
+            //获取数量值
+            var num = $('.ng-pristine').val();
             
             //数组发送ajax请求 ,把数组插入数据库 
             $.ajax({
@@ -592,6 +635,7 @@ function undateStatus(){
                 data : {
                     username : username,
                     goodsId : obj,
+                    num1 : num,
                     time : new Date()
                 },
                 success : function(str){
@@ -629,14 +673,33 @@ function undateStatus(){
                     //如果成功返回1 发送ajax请求 查询购物车订单表
                     if (str == 1) {
                         //渲染小购物车
+                        alert('成功加入购物车');
                         ssCart();
-                    };
+                    }else{
+                        alert('加入购物车失败');
+                    }
                 }
 
             })
 
         });
-
+        //小购物车的数量提示-----------------------------------------------------
+        $.ajax({
+            type : 'get',
+            url : '/360Mark/src/api/shopcart.php',
+            data : {
+                data : 1,
+                username : username,
+                time : new Date()
+            },
+            //渲染价格
+            success : function(str){
+                var arr = JSON.parse(str);
+                var goodsnum = arr[0]["sum(num)"];
+                var ht = '('+goodsnum+')';
+            }
+        })
+        
 
     }else{
         $('.loginbefore').css('display','block');
@@ -646,10 +709,10 @@ function undateStatus(){
         //我的订单
         $('.topNavMyOrder').css('display','none');
         //详情页点击加入购物车 
-        loginResgin();       
+        loginResgin();
     }
 }
-undateStatus();
+
 
 //用户退出 回到首页
 function quit(){
@@ -660,7 +723,7 @@ function quit(){
         $('.loginafter').css('display','none'); 
         $('.cart-tips').css('display','block');
         $('.cart-info').css('display','none');
-        window.location.href="/360Mark/main.html";
+        window.location.href="/360Mark/index.html";
     }) 
 }
 quit();
@@ -734,4 +797,8 @@ $('.searchKey').on('click','a',function(){
     window.open('/360Mark/src/html/details.html?' + id);
 })   
 
+//点击logo回到首页
+$("h1").click(function(){
+    window.open('/360Mark/index.html');
+})
 

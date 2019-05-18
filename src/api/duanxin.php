@@ -20,8 +20,7 @@
     $result = json_decode($content, true);
     if ($result) {
         $datalist = array(
-                'phonecode' => $num,
-                'message' => $result
+                'phonecode' => $num
             );
         echo json_encode($datalist,JSON_UNESCAPED_UNICODE);
     } else {

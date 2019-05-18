@@ -36,7 +36,6 @@
         $res3 = $conn->query($sql3);
         $content3 = $res3->fetch_all(MYSQLI_ASSOC);
         echo json_encode($content3,JSON_UNESCAPED_UNICODE);
-
     } 
 
 

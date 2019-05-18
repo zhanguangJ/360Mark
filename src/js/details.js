@@ -14,7 +14,7 @@
         var p = new Promise(function(succfn){
             $.ajax({
                 type : 'get',
-                url : '../api/main.php',
+                url : '/360Mark/src/api/main.php',
                 async : true,
                 data : {
                     id : 55,
@@ -55,7 +55,7 @@
         //点击那个li就跳转到列表页
         $(".__mall_suggest__").on('click', 'li', function() {
             var name = $(this).attr('data-name')
-            window.open('src/html/list.html?' + name);
+            window.open('/360Mark/src/html/list.html?' + name);
         });
 
         //键盘事件
@@ -95,7 +95,7 @@
                 };
                 if (ev.keyCode === 13) {
                     var name = $(".__mall_suggest__ li").eq(index).children('div').eq(0).html().trim();
-                    window.open('src/html/list.html?' + name);
+                    window.open('/360Mark/src/html/list.html?' + name);
                 };
             });
         });
@@ -110,7 +110,7 @@
         //点击搜索按钮发送表单内的内容到列表页
         $(".search").click(function(){
             var name = $(".text").attr('placeholder')+$(".text").val();
-            window.open('../html/list.html?' + name.trim());
+            window.open('/360Mark/src/html/list.html?' + name.trim());
 
         })
     }

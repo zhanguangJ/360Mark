@@ -87,7 +87,7 @@
                         <div class="quc-login-content">
                             <form class="quc-form log-in">
                                 <div class="quc-form-item quc-mobile">
-                                    <input type="mobile" placeholder="手机号" maxlength="11" />
+                                    <input type="mobile" placeholder="验证码次数不够所以没做请切换到账号登录" maxlength="11" />
                                 </div>
                                 <div class="quc-form-item quc-psw">
                                     <input type="smscode" placeholder="短信验证码"/>
@@ -147,7 +147,7 @@
                                 </div>
 
                                 <div class="quc-form-item quc-input-has-prefix">
-                                    <input type="smscode" placeholder="短信验证码"/>
+                                    <input type="smscode" placeholder="短信验证码" id="SMS"/>
                                     <div class="quc-input-prefix">
                                         <i class='iconfont icon-youjianduanxin'></i>
                                     </div>
@@ -207,7 +207,7 @@
                 <a href="javascript:;">
                     <i class="icon"></i>
                     我的购物车
-                    <span></span>
+                    <span class="cart-size"></span>
                 </a>
                 <div class="header-cart-popup pop-show-tip">
                     <div class="cart-tips">
@@ -234,15 +234,15 @@
                             </li> -->
                         </ul>
                         <div class="cart-count">
-                            <span>
-                                共<b>0</b>
+                            <!-- <span>
+                                共<b class="cartNum">0</b>
                                 件商品 总计：
                                 <b>
                                     <span class="yen">￥</span>
                                     0
                                 </b>
                             </span>
-                            <a href="/360Mark/src/html/cart.html" class="cart-buy">去购物车</a>
+                            <a href="/360Mark/src/html/cart.html" class="cart-buy">去购物车</a> -->
                         </div>
                     </div>
                 </div>              
@@ -468,6 +468,7 @@
 
 
 </body>
+
 <script src="../lib/jquery-1.10.1.min.js"></script>
 <script src="../js/base.js"></script>
 <script src="../lib/layui.js"></script>
