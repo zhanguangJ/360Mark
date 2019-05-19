@@ -6,11 +6,10 @@ require.config({
     },
     shim : {//设置依赖关系
         'swiper' : ['jquery'],
-        'base' : ['jquery','swiper'],
-        'index' : ['jquery','swiper','base']
+        'index' : ['jquery','swiper']
     }
 })
 
-require(["swiper","jquery","base","index"],function(){
+require(["swiper","jquery","index"],function(){
 
 })
